@@ -1,0 +1,219 @@
+- name: Install laptop utils
+  hosts: localhost
+  remote_user: root
+  gather_facts: false
+
+  tasks:
+    - name: Install basic tools
+      ansible.builtin.apt:
+        pkg:
+          - etckeeper
+          - tuptime
+          - wireguard
+      tags: basic
+
+    - name: Remove avahi and rsyslog
+      ansible.builtin.apt:
+        pkg:
+          - avahi-daemon
+          - avahi-utils
+          - rsyslog
+        state: absent
+
+    - name: Install shell, terminals and multiplexers 
+      ansible.builtin.apt:
+        pkg:
+          - zsh
+          - screen
+          - tmux
+          - kitty
+          - rxvt-unicode
+      tags: shell
+
+    - name: Install command-line tools
+      ansible.builtin.apt:
+        pkg:
+          - psmisc
+          - px
+          - ack
+          - ripgrep
+          - gdu
+          - fzf
+          - mc
+          - pmount
+          - zip
+          - unzip
+          - dosfstools
+          - pdftk-java
+          - apt-file
+          - apt-listchanges
+          - deborphan
+      tags: commandline
+
+    - name: Install version control tools
+      ansible.builtin.apt:
+        pkg:
+          - git
+          - vcsh
+          - myrepos
+          - cloc
+      tags: vc
+          
+    - name: Install networking tools
+      ansible.builtin.apt:
+        pkg:
+          - netcat-openbsd
+          - tcpdump
+          - nmap
+          - wireshark
+          - speedtest-cli
+          - iperf3
+          - ethtool
+          - aircrack-ng
+          - socat
+
+    - name: Install mail and chat utils
+      ansible.builtin.apt:
+        pkg:
+          - abook
+          - neomutt
+          - mutt
+          - isync
+          - notmuch
+          - notmuch-mutt
+          - profanity
+          - w3m
+      tags: mail
+
+    - name: Install emacs and elpa pkgs
+      ansible.builtin.apt:
+        pkg:
+          - emacs-gtk
+          - dh-elpa-helper
+          - elpa-auto-complete
+          - elpa-bind-key
+          - elpa-clues-theme
+          - elpa-concurrent
+          - elpa-ctable
+          - elpa-dash
+          - elpa-deferred
+          - elpa-diminish
+          - elpa-dockerfile-mode
+          - elpa-epc
+          - elpa-f
+          - elpa-flx
+          - elpa-flx-ido
+          - elpa-git-annex
+          - elpa-haskell-mode
+          - elpa-ht
+          - elpa-jinja2-mode
+          - elpa-lsp-mode
+          - elpa-lv
+          - elpa-markdown-mode
+          - elpa-modus-themes
+          - elpa-org-bullets
+          - elpa-paredit
+          - elpa-popup
+          - elpa-projectile
+          - elpa-rainbow-mode
+          - elpa-s
+          - elpa-smex
+          - elpa-spinner
+          - elpa-use-package
+          - elpa-virtualenvwrapper
+          - elpa-web-mode
+          - elpa-which-key
+          - elpa-yaml-mode
+          - elpa-yasnippet
+          - elpa-yasnippet-snippets
+      tags: emacs
+
+    - name: Install dictionaries
+      ansible.builtin.apt:
+        pkg:
+          - aspell
+          - aspell-en
+          - aspell-pl
+          - myspell-pl
+      tags:
+        - emacs
+        - dict
+
+    - name: Install debuggers 
+      ansible.builtin.apt:
+        pkg:
+          - strace
+          - ltrace
+          - binwalk
+      tags: debug
+ 
+    - name: Install virtualization tools
+      ansible.builtin.apt:
+        pkg:
+          - systemd-container
+          - debootstrap
+      tags: virt
+
+    - name: Install multimedia utils
+      ansible.builtin.apt:
+        pkg:
+          - feh
+          - viewnior
+          - evince
+          - gimp
+          - gimp-gmic
+          - imagemagick
+          - fgallery
+          - mpv
+          - ffmpeg
+          - mat2
+          - scrot
+      tags: media
+
+    - name: Install xorg
+      ansible.builtin.apt:
+        pkg:
+          - xserver-xorg
+          - xserver-xorg-core
+          - xserver-xorg-input-all
+          - xserver-xorg-input-libinput
+          - xserver-xorg-input-synaptics
+          - xserver-xorg-input-wacom
+          - xserver-xorg-legacy
+          - xserver-xorg-video-intel
+          - x11-xserver-utils
+          - x11-utils
+          - x11-common
+          - slim
+      tags:
+        - xorg
+        - xmonad
+
+    - name: Install xmonad
+      ansible.builtin.apt:
+        pkg:
+          - libghc-xmonad-contrib-dev
+          - libghc-xmonad-contrib-doc
+          - libghc-xmonad-dev
+          - libghc-xmonad-doc
+          - libghc-xmonad-extras-dev
+          - libghc-xmonad-wallpaper-dev
+          - xmonad
+          - xmobar
+          - suckless-tools
+          - xss-lock
+          - redshift
+          - compton
+          - concalc
+          - dunst
+          - unclutter
+          - parcellite
+      tags: xmonad
+
+    - name: Install web browsers
+      ansible.builtin.apt:
+        pkg:
+          - firefox-esr
+          - chromium
+      tags: browser
+  
