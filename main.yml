@@ -48,6 +48,7 @@
           - apt-file
           - apt-listchanges
           - deborphan
+          - enca
       tags: commandline
 
     - name: Install version control tools
@@ -71,6 +72,8 @@
           - ethtool
           - aircrack-ng
           - socat
+          - bind9-dnsutils
+      tags: network
 
     - name: Install mail and chat utils
       ansible.builtin.apt:
@@ -217,3 +220,19 @@
           - chromium
       tags: browser
   
+    - name: Install X11 tools
+      ansible.builtin.apt:
+        pkg:
+          - tigervnc-viewer
+          - simple-scan
+          - evolution-data-server
+          - gnome-calendar
+      tags: vnc
+
+    - name: Install python tools
+      ansible.builtin.apt:
+        pkg:
+          - python3
+          - ipython3
+          - python3-pandas
+      tags: python
