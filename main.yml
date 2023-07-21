@@ -49,6 +49,7 @@
           - apt-listchanges
           - deborphan
           - enca
+          - secure-delete
       tags: commandline
 
     - name: Install version control tools
