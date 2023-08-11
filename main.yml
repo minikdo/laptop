@@ -238,3 +238,16 @@
           - ipython3
           - python3-pandas
       tags: python
+
+    - name: Insert 10periodic in apt.conf.d
+      ansible.builtin.blockinfile:
+        path: /etc/apt/apt.conf.d/10periodic
+        block: |
+          APT::Periodic::Enable "1";
+          APT::Periodic::MaxAge "30d";
+          APT::Periodic::Update-Package-Lists "1";
+          APT::Periodic::Verbose "1";
+          APT::Periodic::Download-Upgradeable-Packages "1";
+          APT::Periodic::Unattended-Upgrade "0";
+      tags: aptconf
+  
