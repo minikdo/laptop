@@ -47,6 +47,7 @@
           - pdftk-java
           - apt-file
           - apt-listchanges
+          - needrestart
           - deborphan
           - enca
           - secure-delete
