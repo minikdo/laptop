@@ -258,8 +258,16 @@
           APT::Install-Recommends "0";
           APT::Install-Suggests "0";
       tags: aptconf
-  
-    - name: Configure postfix
+
+    - name: Install Postfix
+      ansible.builtin.apt:
+        pkg:
+          - postfix
+          - bsd-mailx
+          - libsasl2-2
+      tags: postfix
+      
+    - name: Configure Postfix
       ansible.builtin.blockinfile:
         path: /etc/postfix/main.cf
         block: |
@@ -275,4 +283,4 @@
           smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
           smtp_sasl_security_options =
           smtpd_relay_restrictions = reject_unauth_destination
-      tags: ['never', 'postfix']
+      tags: postfix
