@@ -1,6 +1,7 @@
 - name: Install laptop utils
   hosts: localhost
-  remote_user: root
+  become: true
+  become_method: ansible.builtin.sudo
   gather_facts: false
 
   tasks:
