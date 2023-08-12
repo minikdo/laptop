@@ -251,3 +251,11 @@
           APT::Periodic::Unattended-Upgrade "0";
       tags: aptconf
   
+    - name: Insert 01norecommends in apt.conf.d
+      ansible.builtin.blockinfile:
+        path: /etc/apt/apt.conf.d/01norecommend
+        block: |
+          APT::Install-Recommends "0";
+          APT::Install-Suggests "0";
+      tags: aptconf
+  
