@@ -51,6 +51,7 @@
           - deborphan
           - enca
           - secure-delete
+          - tzwatch
       tags: commandline
 
     - name: Install version control tools
@@ -87,6 +88,7 @@
           - notmuch
           - notmuch-mutt
           - profanity
+          - bsd-mailx
           - w3m
       tags: mail
 
@@ -271,7 +273,6 @@
       ansible.builtin.apt:
         pkg:
           - postfix
-          - bsd-mailx
           - libsasl2-2
       tags: postfix
       
