@@ -239,6 +239,14 @@
           - python3-pandas
       tags: python
 
+    - name: Install TeX LaTeX XeTeX
+      ansible.builtin.apt:
+        pkg:
+          - texlive-latex-extra
+          - texlive-latex-recommended
+          - texlive-xetex
+      tags: texlive
+
     - name: Insert 10periodic in apt.conf.d
       ansible.builtin.blockinfile:
         path: /etc/apt/apt.conf.d/10periodic
