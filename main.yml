@@ -293,3 +293,11 @@
           smtp_sasl_security_options =
           smtpd_relay_restrictions = reject_unauth_destination
       tags: postfix
+
+    - name: Set journald retention
+      ansible.builtin.blockinfile:
+        path: /etc/systemd/journald.conf.d/retention.conf
+        block: |
+          [Journal]
+          MaxRetentionSec=1month
+      tags: journald
