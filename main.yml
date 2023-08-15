@@ -307,7 +307,16 @@
         create: true
       tags: journald
 
-    - name: Set journald retention
+    - name: Install gpg
+      ansible.builtin.apt:
+        pkg:
+          - gpg
+          - gpg-agent
+          - scdaemon
+          - pcscd
+      tags: gpg
+      
+    - name: Setup gpg-agent
       ansible.builtin.blockinfile:
         path: /home/domino/.gnupg/gpg-agent.conf
         block: |
@@ -319,6 +328,8 @@
           pinentry-program /usr/bin/pinentry-curses
         create: true
         owner: domino
-      tags: gpgagent
-          
-    
+      tags: gpg
+              
+    - name: Reboot machine in 10 sec
+      ansible.builtin.reboot:
+        reboot_timeout: 10
