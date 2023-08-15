@@ -306,3 +306,19 @@
           MaxRetentionSec=1month
         create: true
       tags: journald
+
+    - name: Set journald retention
+      ansible.builtin.blockinfile:
+        path: /home/domino/.gnupg/gpg-agent.conf
+        block: |
+          default-cache-ttl 14400
+          max-cache-ttl 14401
+          enable-ssh-support
+          keep-display
+          #pinentry-program /usr/bin/pinentry-gtk-2
+          pinentry-program /usr/bin/pinentry-curses
+        create: true
+        owner: domino
+      tags: gpgagent
+          
+    
