@@ -2,9 +2,22 @@
   hosts: localhost
   become: true
   become_method: ansible.builtin.sudo
-  gather_facts: false
-
+  gather_facts: true
+  gather_subset:
+    - "machine"
+    - "!all"
+    - "!env"
+    - "!min"
+  vars_files:
+    - vars/wireguard.yml
+    - vars/network.yml
+    
   tasks:
+    - name: Show Gathered Facts
+      debug:
+        msg: "{{ ansible_facts }}"
+      tags: never
+
     - name: Insert 10periodic in apt.conf.d
       ansible.builtin.blockinfile:
         path: /etc/apt/apt.conf.d/10periodic
@@ -329,7 +342,35 @@
         create: true
         owner: domino
       tags: gpg
-              
+
+    - name: Configure wireguard network
+      ansible.builtin.template:
+        src: "roles/wireguard/templates/wg.network.j2"
+        dest: "/etc/systemd/network/{{ item }}.network"
+      loop:
+        - wg0
+        - wg4
+        - wg5
+        - wg6
+      tags: wireguard
+        
+    - name: Configure wireguard netdev
+      ansible.builtin.template:
+        src: "roles/wireguard/templates/wg.netdev.j2"
+        dest: "/etc/systemd/network/{{ item }}.netdev"
+      loop:
+        - wg0
+        - wg4
+        - wg5
+        - wg6
+      tags: wireguard2
+        
+    - name: Configure wlan network
+      ansible.builtin.template:
+        src: "roles/systemd-network/templates/wlan.network.j2"
+        dest: "/etc/systemd/network/{{ iface[hostvars['localhost'].ansible_fqdn] }}.network"
+      tags: systemd-network
+        
     - name: Reboot machine in 10 sec
       ansible.builtin.reboot:
         reboot_timeout: 10

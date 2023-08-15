@@ -1,0 +1,13 @@
+[NetDev]
+Name={{ item }}
+Kind=wireguard
+Description=wireguard tunnel
+MTUBytes=1350
+
+[WireGuard]
+PrivateKeyFile=/etc/systemd/network/wg.key
+
+[WireGuardPeer]
+PublicKey={{ publickey[item] }}
+Endpoint={{ endpoint[item] }}
+AllowedIPs={{ allowedips[item] }}
