@@ -5,6 +5,26 @@
   gather_facts: false
 
   tasks:
+    - name: Insert 10periodic in apt.conf.d
+      ansible.builtin.blockinfile:
+        path: /etc/apt/apt.conf.d/10periodic
+        block: |
+          APT::Periodic::Enable "1";
+          APT::Periodic::MaxAge "30d";
+          APT::Periodic::Update-Package-Lists "1";
+          APT::Periodic::Verbose "1";
+          APT::Periodic::Download-Upgradeable-Packages "1";
+          APT::Periodic::Unattended-Upgrade "0";
+      tags: aptconf
+  
+    - name: Insert 01norecommends in apt.conf.d
+      ansible.builtin.blockinfile:
+        path: /etc/apt/apt.conf.d/01norecommend
+        block: |
+          APT::Install-Recommends "0";
+          APT::Install-Suggests "0";
+      tags: aptconf
+
     - name: Install basic tools
       ansible.builtin.apt:
         pkg:
@@ -249,26 +269,6 @@
           - texlive-latex-recommended
           - texlive-xetex
       tags: texlive
-
-    - name: Insert 10periodic in apt.conf.d
-      ansible.builtin.blockinfile:
-        path: /etc/apt/apt.conf.d/10periodic
-        block: |
-          APT::Periodic::Enable "1";
-          APT::Periodic::MaxAge "30d";
-          APT::Periodic::Update-Package-Lists "1";
-          APT::Periodic::Verbose "1";
-          APT::Periodic::Download-Upgradeable-Packages "1";
-          APT::Periodic::Unattended-Upgrade "0";
-      tags: aptconf
-  
-    - name: Insert 01norecommends in apt.conf.d
-      ansible.builtin.blockinfile:
-        path: /etc/apt/apt.conf.d/01norecommend
-        block: |
-          APT::Install-Recommends "0";
-          APT::Install-Suggests "0";
-      tags: aptconf
 
     - name: Install Postfix
       ansible.builtin.apt:
