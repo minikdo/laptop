@@ -184,7 +184,7 @@
           - debootstrap
       tags: virt
 
-    - name: Install multimedia utils
+    - name: Install media utils
       ansible.builtin.apt:
         pkg:
           - feh
@@ -246,7 +246,7 @@
           - chromium
       tags: browser
   
-    - name: Install X11 tools
+    - name: Install X11
       ansible.builtin.apt:
         pkg:
           - tigervnc-viewer
@@ -255,7 +255,7 @@
           - gnome-calendar
       tags: vnc
 
-    - name: Install python tools
+    - name: Install python
       ansible.builtin.apt:
         pkg:
           - python3
@@ -263,7 +263,7 @@
           - python3-pandas
       tags: python
 
-    - name: Install TeX LaTeX XeTeX
+    - name: Install texlive
       ansible.builtin.apt:
         pkg:
           - texlive-latex-extra
@@ -271,14 +271,14 @@
           - texlive-xetex
       tags: texlive
 
-    - name: Install Postfix
+    - name: Install postfix
       ansible.builtin.apt:
         pkg:
           - postfix
           - libsasl2-2
       tags: postfix
       
-    - name: Configure Postfix
+    - name: Configure postfix
       ansible.builtin.blockinfile:
         path: /etc/postfix/main.cf
         block: |
