@@ -2,7 +2,7 @@
 Name={{ item }}
 
 [Network]
-Address={{ ip[hostvars['localhost'].ansible_fqdn][item] }}/24
+Address={{ ip[hostvars['localhost'].ansible_hostname][item] }}/24
 LLMNR=false
 MulticastDNS=false
 DNS={{ dns[item] }}
