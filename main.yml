@@ -233,7 +233,6 @@
           - suckless-tools
           - xss-lock
           - redshift
-          - compton
           - concalc
           - dunst
           - unclutter
