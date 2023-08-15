@@ -363,7 +363,7 @@
         - wg4
         - wg5
         - wg6
-      tags: wireguard2
+      tags: wireguard
         
     - name: Configure wlan network
       ansible.builtin.template:
