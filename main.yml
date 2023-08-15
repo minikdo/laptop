@@ -88,6 +88,8 @@
           - enca
           - secure-delete
           - tzwatch
+          - man-db
+          - pass
       tags: commandline
 
     - name: Install version control tools
@@ -228,6 +230,7 @@
           - x11-utils
           - x11-common
           - slim
+          - xbacklight
       tags:
         - xorg
         - xmonad
@@ -274,6 +277,7 @@
           - python3
           - ipython3
           - python3-pandas
+          - virtualenvwrapper
       tags: python
 
     - name: Install texlive
