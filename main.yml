@@ -383,6 +383,20 @@
         mode: "0644"
       tags: systemd-network
 
+    - name: Enable and start systemd-networkd
+      ansible.builtin.systemd:
+        state: started
+        enabled: true
+        name: systemd-networkd
+      tags: systemd-network
+
+    - name: Stop and disable networking.service
+      ansible.builtin.systemd:
+        state: stopped
+        enabled: false
+        name: networking
+      tags: systemd-network
+
     - name: Download signal gpg key
       ansible.builtin.get_url:
         url: https://minik.pl/files/signal-desktop-keyring.gpg
