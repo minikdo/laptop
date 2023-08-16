@@ -374,7 +374,28 @@
         src: "roles/systemd-network/templates/wlan.network.j2"
         dest: "/etc/systemd/network/{{ iface[hostvars['localhost'].ansible_hostname] }}.network"
       tags: systemd-network
-        
+
+    - name: Download signal gpg key
+      ansible.builtin.get_url:
+        url: https://minik.pl/files/signal-desktop-keyring.gpg
+        dest: /usr/share/keyrings/signal-desktop-keyring.gpg
+        mode: '0640'
+        checksum: sha256:efff7943ad544a2a10e10e232e695b6e7888348fb95f1deff2085fd8cab67e32
+      tags: signal
+
+    - name: Add signal apt repo
+      ansible.builtin.lineinfile:
+        path: /etc/apt/sources.list
+        regexp: signal
+        line: "deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main"
+      tags: signal
+
+    - name: Install signal
+      ansible.builtin.apt:
+        pkg: signal-desktop
+        update_cache: true
+      tags: signal
+
     - name: Reboot machine in 10 sec
       ansible.builtin.reboot:
         reboot_timeout: 10
