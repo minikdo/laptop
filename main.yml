@@ -407,6 +407,8 @@
     - name: Create a directory if it does not exist
       ansible.builtin.file:
         path: "{{ item }}"
+        owner: domino
+        group: domino
         state: directory
         mode: '0755'
       loop:
@@ -419,6 +421,8 @@
         url: https://minik.pl/files/iosevka.zip
         dest: /home/domino/Downloads/iosevka.zip
         mode: '0644'
+        owner: domino
+        group: domino
         checksum: sha256:29e4827a820a5ed66d7c3634e17bbb36b6308c6e92d5a801c48fc867acf97c24
       tags: iosevka
 
@@ -427,6 +431,7 @@
         src: /home/domino/Downloads/iosevka.zip
         dest: /home/domino/.local/share/fonts/truetype/iosevka
         owner: domino
+        group: domino
       tags: iosevka
 
     - name: Reboot machine in 10 sec
