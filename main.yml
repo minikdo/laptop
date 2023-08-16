@@ -105,6 +105,21 @@
           - cloc
       tags: vc
 
+    - name: Install cups
+      ansible.builtin.apt:
+        pkg:
+          - cups
+          - cups-client
+          - cups-bsd
+      tags: cups
+
+    - name: Stop and disable cups
+      ansible.builtin.systemd:
+        state: stopped
+        enabled: false
+        name: cups
+      tags: cups
+
     - name: Install networking tools
       ansible.builtin.apt:
         pkg:
@@ -449,6 +464,13 @@
         owner: domino
         group: domino
       tags: iosevka
+
+    - name: Add the user domino to groups
+      ansible.builtin.user:
+        name: domino
+        shell: /bin/zsh
+        groups: sudo,adm,lp,systemd-journal,wireshark,lpadmin
+        append: true
 
     - name: Reboot machine in 10 sec
       ansible.builtin.reboot:
