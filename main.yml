@@ -315,9 +315,10 @@
       tags: postfix
 
     - name: Configure postfix
-      ansible.builtin.blockinfile:
-        path: /etc/postfix/main.cf
-        block: |
+      ansible.builtin.copy:
+        dest: /etc/postfix/main.cf
+        content: |
+          # MANAGED BY ANSIBLE
           myorigin = minik.pl
           smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
           smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
@@ -331,7 +332,6 @@
           smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
           smtp_sasl_security_options =
           smtpd_relay_restrictions = reject_unauth_destination
-        create: true
         mode: "0644"
       tags: postfix
 
