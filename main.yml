@@ -469,7 +469,7 @@
       ansible.builtin.user:
         name: domino
         shell: /bin/zsh
-        groups: sudo,adm,lp,systemd-journal,wireshark,lpadmin
+        groups: sudo,adm,systemd-journal,lp,lpadmin
         append: true
 
     - name: Reboot machine in 10 sec
