@@ -404,6 +404,21 @@
         update_cache: true
       tags: signal
 
+    - name: Download iosevka fonts
+      ansible.builtin.get_url:
+        url: https://minik.pl/files/iosevka.zip
+        dest: /home/domino/Downloads/iosevka.zip
+        mode: '0644'
+        checksum: sha256:29e4827a820a5ed66d7c3634e17bbb36b6308c6e92d5a801c48fc867acf97c24
+      tags: iosevka
+
+    - name: Extract iosevka.zip
+      ansible.builtin.unarchive:
+        src: /home/domino/Downloads/iosevka.zip
+        dest: /home/domino/.local/share/fonts/truetype/iosevka
+        owner: domino
+      tags: iosevka
+
     - name: Reboot machine in 10 sec
       ansible.builtin.reboot:
         reboot_timeout: 10
