@@ -11,10 +11,10 @@
   vars_files:
     - vars/wireguard.yml
     - vars/network.yml
-    
+
   tasks:
     - name: Show Gathered Facts
-      debug:
+      ansible.builtin.debug:
         msg: "{{ ansible_facts }}"
       tags: never
 
@@ -29,8 +29,9 @@
           APT::Periodic::Download-Upgradeable-Packages "1";
           APT::Periodic::Unattended-Upgrade "0";
         create: true
+        mode: "0600"
       tags: aptconf
-  
+
     - name: Insert 01norecommends in apt.conf.d
       ansible.builtin.blockinfile:
         path: /etc/apt/apt.conf.d/01norecommend
@@ -38,6 +39,7 @@
           APT::Install-Recommends "0";
           APT::Install-Suggests "0";
         create: true
+        mode: "0600"
       tags: aptconf
 
     - name: Install basic tools
@@ -56,7 +58,7 @@
           - rsyslog
         state: absent
 
-    - name: Install shell, terminals and multiplexers 
+    - name: Install shell, terminals and multiplexers
       ansible.builtin.apt:
         pkg:
           - zsh
@@ -100,7 +102,7 @@
           - myrepos
           - cloc
       tags: vc
-          
+
     - name: Install networking tools
       ansible.builtin.apt:
         pkg:
@@ -184,14 +186,14 @@
         - emacs
         - dict
 
-    - name: Install debuggers 
+    - name: Install debuggers
       ansible.builtin.apt:
         pkg:
           - strace
           - ltrace
           - binwalk
       tags: debug
- 
+
     - name: Install virtualization tools
       ansible.builtin.apt:
         pkg:
@@ -261,7 +263,7 @@
           - firefox-esr
           - chromium
       tags: browser
-  
+
     - name: Install X11
       ansible.builtin.apt:
         pkg:
@@ -294,7 +296,7 @@
           - postfix
           - libsasl2-2
       tags: postfix
-      
+
     - name: Configure postfix
       ansible.builtin.blockinfile:
         path: /etc/postfix/main.cf
@@ -313,6 +315,7 @@
           smtp_sasl_security_options =
           smtpd_relay_restrictions = reject_unauth_destination
         create: true
+        mode: "0640"
       tags: postfix
 
     - name: Set journald retention
@@ -322,6 +325,7 @@
           [Journal]
           MaxRetentionSec=1month
         create: true
+        mode: "0644"
       tags: journald
 
     - name: Install gpg
@@ -332,7 +336,7 @@
           - scdaemon
           - pcscd
       tags: gpg
-      
+
     - name: Setup gpg-agent
       ansible.builtin.blockinfile:
         path: /home/domino/.gnupg/gpg-agent.conf
@@ -345,34 +349,38 @@
           pinentry-program /usr/bin/pinentry-curses
         create: true
         owner: domino
+        mode: "0600"
       tags: gpg
 
     - name: Configure wireguard network
       ansible.builtin.template:
         src: "roles/wireguard/templates/wg.network.j2"
         dest: "/etc/systemd/network/{{ item }}.network"
+        mode: "0644"
       loop:
         - wg0
         - wg4
         - wg5
         - wg6
       tags: wireguard
-        
+
     - name: Configure wireguard netdev
       ansible.builtin.template:
         src: "roles/wireguard/templates/wg.netdev.j2"
         dest: "/etc/systemd/network/{{ item }}.netdev"
+        mode: "0644"
       loop:
         - wg0
         - wg4
         - wg5
         - wg6
       tags: wireguard
-        
+
     - name: Configure wlan network
       ansible.builtin.template:
         src: "roles/systemd-network/templates/wlan.network.j2"
         dest: "/etc/systemd/network/{{ iface[hostvars['localhost'].ansible_hostname] }}.network"
+        mode: "0644"
       tags: systemd-network
 
     - name: Download signal gpg key
