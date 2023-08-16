@@ -404,6 +404,16 @@
         update_cache: true
       tags: signal
 
+    - name: Create a directory if it does not exist
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - /home/domino/Downloads
+        - /home/domino/.local/share/fonts/truetype/iosevka
+      tags: iosevka
+
     - name: Download iosevka fonts
       ansible.builtin.get_url:
         url: https://minik.pl/files/iosevka.zip
