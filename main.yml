@@ -232,6 +232,7 @@
           - ffmpeg
           - mat2
           - scrot
+          - zbar-tools
       tags: media
 
     - name: Install xorg
