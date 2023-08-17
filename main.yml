@@ -308,6 +308,12 @@
           - texlive-xetex
       tags: texlive
 
+    - name: Install syncthing
+      ansible.builtin.apt:
+        pkg:
+          - syncthing
+      tags: syncthing
+
     - name: Install postfix
       ansible.builtin.apt:
         pkg:
