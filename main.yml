@@ -11,6 +11,9 @@
   vars_files:
     - vars/wireguard.yml
     - vars/network.yml
+    - vars/urls.yml
+  vars:
+    home_dir: /home/domino
 
   tasks:
     - name: Show Gathered Facts
@@ -363,7 +366,7 @@
 
     - name: Setup gpg-agent
       ansible.builtin.blockinfile:
-        path: /home/domino/.gnupg/gpg-agent.conf
+        path: "{{ home_dir }}/.gnupg/gpg-agent.conf"
         block: |
           default-cache-ttl 14400
           max-cache-ttl 14401
@@ -423,7 +426,7 @@
 
     - name: Download signal gpg key
       ansible.builtin.get_url:
-        url: https://minik.pl/files/signal-desktop-keyring.gpg
+        url: {{ signal_keyring_url }}
         dest: /usr/share/keyrings/signal-desktop-keyring.gpg
         mode: '0644'
         checksum: sha256:efff7943ad544a2a10e10e232e695b6e7888348fb95f1deff2085fd8cab67e32
@@ -450,14 +453,14 @@
         state: directory
         mode: '0755'
       loop:
-        - /home/domino/Downloads
-        - /home/domino/.local/share/fonts/truetype/iosevka
+        - "{{ home_dir }}/Downloads"
+        - "{{ home_dir }}/.local/share/fonts/truetype/iosevka"
       tags: iosevka
 
     - name: Download iosevka fonts
       ansible.builtin.get_url:
-        url: https://minik.pl/files/iosevka.zip
-        dest: /home/domino/Downloads/iosevka.zip
+        url: {{ iosevka_fonts_url }}
+        dest: "{{ home_dir }}/Downloads/iosevka.zip"
         mode: '0644'
         owner: domino
         group: domino
@@ -466,8 +469,8 @@
 
     - name: Extract iosevka.zip
       ansible.builtin.unarchive:
-        src: /home/domino/Downloads/iosevka.zip
-        dest: /home/domino/.local/share/fonts/truetype/iosevka
+        src: "{{ home_dir }}/Downloads/iosevka.zip"
+        dest: "{{ home_dir }}/.local/share/fonts/truetype/iosevka"
         owner: domino
         group: domino
       tags: iosevka
