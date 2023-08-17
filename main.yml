@@ -426,7 +426,7 @@
 
     - name: Download signal gpg key
       ansible.builtin.get_url:
-        url: {{ signal_keyring_url }}
+        url: "{{ signal_keyring_url }}"
         dest: /usr/share/keyrings/signal-desktop-keyring.gpg
         mode: '0644'
         checksum: sha256:efff7943ad544a2a10e10e232e695b6e7888348fb95f1deff2085fd8cab67e32
@@ -459,7 +459,7 @@
 
     - name: Download iosevka fonts
       ansible.builtin.get_url:
-        url: {{ iosevka_fonts_url }}
+        url: "{{ iosevka_fonts_url }}"
         dest: "{{ home_dir }}/Downloads/iosevka.zip"
         mode: '0644'
         owner: domino
