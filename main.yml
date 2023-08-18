@@ -51,7 +51,9 @@
           - etckeeper
           - tuptime
           - wireguard
-      tags: basic
+      tags:
+        - basic
+        - apt
 
     - name: Remove avahi and rsyslog
       ansible.builtin.apt:
@@ -71,7 +73,9 @@
           - tmux
           - kitty
           - rxvt-unicode
-      tags: shell
+      tags:
+        - shell
+        - apt
 
     - name: Install command-line tools
       ansible.builtin.apt:
@@ -97,7 +101,9 @@
           - tzwatch
           - man-db
           - pass
-      tags: commandline
+      tags:
+        - commandline
+        - apt
 
     - name: Install version control tools
       ansible.builtin.apt:
@@ -106,7 +112,9 @@
           - vcsh
           - myrepos
           - cloc
-      tags: vc
+      tags:
+        - vc
+        - apt
 
     - name: Install cups
       ansible.builtin.apt:
@@ -114,7 +122,9 @@
           - cups
           - cups-client
           - cups-bsd
-      tags: cups
+      tags:
+        - cups
+        - apt
 
     - name: Stop and disable cups
       ansible.builtin.systemd:
@@ -136,7 +146,9 @@
           - aircrack-ng
           - socat
           - bind9-dnsutils
-      tags: network
+      tags:
+        - network
+        - apt
 
     - name: Install mail and chat utils
       ansible.builtin.apt:
@@ -150,7 +162,9 @@
           - profanity
           - bsd-mailx
           - w3m
-      tags: mail
+      tags:
+        - mail
+        - apt
 
     - name: Install emacs and elpa pkgs
       ansible.builtin.apt:
@@ -193,7 +207,9 @@
           - elpa-yaml-mode
           - elpa-yasnippet
           - elpa-yasnippet-snippets
-      tags: emacs
+      tags:
+        - emacs
+        - apt
 
     - name: Install dictionaries
       ansible.builtin.apt:
@@ -205,6 +221,7 @@
       tags:
         - emacs
         - dict
+        - apt
 
     - name: Install debuggers
       ansible.builtin.apt:
@@ -212,14 +229,18 @@
           - strace
           - ltrace
           - binwalk
-      tags: debug
+      tags:
+        - debug
+        - apt
 
     - name: Install virtualization tools
       ansible.builtin.apt:
         pkg:
           - systemd-container
           - debootstrap
-      tags: virt
+      tags:
+        - virt
+        - apt
 
     - name: Install media utils
       ansible.builtin.apt:
@@ -236,7 +257,9 @@
           - mat2
           - scrot
           - zbar-tools
-      tags: media
+      tags:
+        - media
+        - apt
 
     - name: Install xorg
       ansible.builtin.apt:
@@ -257,6 +280,7 @@
       tags:
         - xorg
         - xmonad
+        - apt
 
     - name: Install xmonad
       ansible.builtin.apt:
@@ -276,14 +300,18 @@
           - dunst
           - unclutter
           - parcellite
-      tags: xmonad
+      tags:
+        - xmonad
+        - apt
 
     - name: Install web browsers
       ansible.builtin.apt:
         pkg:
           - firefox-esr
           - chromium
-      tags: browser
+      tags:
+        - browser
+        - apt
 
     - name: Install X11
       ansible.builtin.apt:
@@ -292,7 +320,9 @@
           - simple-scan
           - evolution-data-server
           - gnome-calendar
-      tags: vnc
+      tags:
+        - vnc
+        - apt
 
     - name: Install python
       ansible.builtin.apt:
@@ -301,7 +331,9 @@
           - ipython3
           - python3-pandas
           - virtualenvwrapper
-      tags: python
+      tags:
+        - python
+        - apt
 
     - name: Install texlive
       ansible.builtin.apt:
@@ -309,20 +341,26 @@
           - texlive-latex-extra
           - texlive-latex-recommended
           - texlive-xetex
-      tags: texlive
+      tags:
+        - texlive
+        - apt
 
     - name: Install syncthing
       ansible.builtin.apt:
         pkg:
           - syncthing
-      tags: syncthing
+      tags:
+        - syncthing
+        - apt
 
     - name: Install postfix
       ansible.builtin.apt:
         pkg:
           - postfix
           - libsasl2-2
-      tags: postfix
+      tags:
+        - postfix
+        - apt
 
     - name: Configure postfix
       ansible.builtin.copy:
