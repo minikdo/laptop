@@ -209,6 +209,7 @@
           - elpa-yasnippet-snippets
       tags:
         - emacs
+        - elpa
         - apt
 
     - name: Install dictionaries
