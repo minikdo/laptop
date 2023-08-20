@@ -258,6 +258,8 @@
           - mat2
           - scrot
           - zbar-tools
+          - genisoimage
+          - wodim
       tags:
         - media
         - apt
