@@ -516,6 +516,13 @@
         group: domino
       tags: iosevka
 
+    - name: Install oh-my-zsh
+      ansible.builtin.git:
+        repo: https://github.com/ohmyzsh/ohmyzsh.git
+        dest: "{{ home_dir }}/.oh-my-zsh"
+      become: domino
+      tags: ohmyzsh
+
     - name: Add the user domino to groups
       ansible.builtin.user:
         name: domino
