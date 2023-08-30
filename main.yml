@@ -546,6 +546,15 @@
         groups: sudo,adm,systemd-journal,lp,lpadmin
         append: true
 
+    - name: Copy nftables
+      ansible.builtin.copy:
+        src: roles/nftables/files/nftables.conf
+        dest: /etc/nftables.conf
+        owner: root
+        group: root
+        mode: '0755'
+      tags: nftables
+
     - name: Set keyboard default
       ansible.builtin.lineinfile:
         path: /etc/default/keyboard
