@@ -416,6 +416,7 @@
         pkg:
           - gpg
           - gpg-agent
+          - pinentry-gtk2
           - scdaemon
           - pcscd
       tags: gpg
