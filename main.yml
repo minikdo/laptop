@@ -526,7 +526,7 @@
       ansible.builtin.git:
         repo: https://github.com/ohmyzsh/ohmyzsh.git
         dest: "{{ home_dir }}/.oh-my-zsh"
-      become: domino
+      become_user: domino
       tags: ohmyzsh
 
     - name: Add the user domino to groups
