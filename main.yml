@@ -467,6 +467,17 @@
         mode: "0644"
       tags: systemd-network
 
+    - name: Configure wpa_supplicant
+      ansible.builtin.copy:
+        dest: "/etc/wpa_supplicant/wpa_supplicant-{{ iface[hostvars['localhost'].ansible_hostname] }}.conf"
+        content: |
+          ctrl_interface=DIR=/run/wpa_supplicant GROUP=adm
+          update_config=1
+          p2p_disabled=1
+          pmf=1
+        mode: "0640"
+      tags: wpasupplicant
+
     - name: Enable now systemd-networkd
       ansible.builtin.systemd:
         state: started
