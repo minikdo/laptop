@@ -482,7 +482,7 @@
 
     - name: Install signal
       ansible.builtin.apt:
-        pkg: signal-desktop
+        pkg: signal-desktop-beta
         update_cache: true
       tags: signal
 
