@@ -165,6 +165,7 @@
           - notmuch-mutt
           - profanity
           - bsd-mailx
+          - mblaze
           - w3m
       tags:
         - mail
@@ -402,6 +403,13 @@
         create: true
         mode: "0644"
       tags: journald
+
+    - name: Install yubikey tools
+      ansible.builtin.apt:
+        pkg:
+          - yubikey-manager
+          - libpam-yubico
+      tags: yubico
 
     - name: Install gpg
       ansible.builtin.apt:
