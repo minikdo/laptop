@@ -466,14 +466,14 @@
         mode: "0644"
       tags: systemd-network
 
-    - name: Enable and start systemd-networkd
+    - name: Enable now systemd-networkd
       ansible.builtin.systemd:
         state: started
         enabled: true
         name: systemd-networkd
       tags: systemd-network
 
-    - name: Stop and disable networking.service
+    - name: Disable now networking.service
       ansible.builtin.systemd:
         state: stopped
         enabled: false
@@ -495,13 +495,13 @@
         line: "deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main"
       tags: signal
 
-    - name: Install signal
+    - name: Install signal-beta
       ansible.builtin.apt:
         pkg: signal-desktop-beta
         update_cache: true
       tags: signal
 
-    - name: Create a directory if it does not exist
+    - name: Create a dirs
       ansible.builtin.file:
         path: "{{ item }}"
         owner: domino
