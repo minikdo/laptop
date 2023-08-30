@@ -60,6 +60,7 @@
         pkg:
           - avahi-daemon
           - avahi-utils
+          - avahi-autoipd
           - rsyslog
           - bluetooth
           - bluez
