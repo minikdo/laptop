@@ -545,6 +545,13 @@
         groups: sudo,adm,systemd-journal,lp,lpadmin
         append: true
 
+    - name: Set keyboard default
+      ansible.builtin.lineinfile:
+        path: /etc/default/keyboard
+        regexp: '^XKBOPTIONS='
+        line: 'XKBOPTIONS="ctrl:nocaps"'
+      tags: nocaps
+
     - name: Reboot machine in 10 sec
       ansible.builtin.reboot:
         reboot_timeout: 10
