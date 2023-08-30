@@ -94,6 +94,7 @@
           - pdftk-java
           - apt-file
           - apt-listchanges
+          - debian-keyring
           - needrestart
           - deborphan
           - enca
@@ -101,6 +102,8 @@
           - tzwatch
           - man-db
           - pass
+          - jq
+          - man-db
       tags:
         - commandline
         - apt
@@ -303,6 +306,9 @@
           - dunst
           - unclutter
           - parcellite
+          - breeze-cursor-theme
+          - arc-theme
+          - lxappearance
       tags:
         - xmonad
         - apt
