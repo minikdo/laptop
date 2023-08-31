@@ -1,4 +1,4 @@
-- name: Install laptop utils
+- name: Laptop setup
   hosts: localhost
   become: true
   become_method: ansible.builtin.sudo
@@ -16,12 +16,12 @@
     home_dir: /home/domino
 
   tasks:
-    - name: Show Gathered Facts
+    - name: Show gathered facts
       ansible.builtin.debug:
         msg: "{{ ansible_facts }}"
       tags: never
 
-    - name: Insert 10periodic in apt.conf.d
+    - name: Congfigure apt periodic
       ansible.builtin.blockinfile:
         path: /etc/apt/apt.conf.d/10periodic
         block: |
@@ -35,7 +35,7 @@
         mode: "0644"
       tags: aptconf
 
-    - name: Insert 01norecommends in apt.conf.d
+    - name: Configure apt norecommends
       ansible.builtin.blockinfile:
         path: /etc/apt/apt.conf.d/01norecommend
         block: |
@@ -51,7 +51,9 @@
           - etckeeper
           - tuptime
           - wireguard
-      tags:
+          - debian-keyring
+          - polkitd
+     tags:
         - basic
         - apt
 
@@ -70,10 +72,10 @@
       ansible.builtin.apt:
         pkg:
           - zsh
-          - screen
-          - tmux
           - kitty
           - rxvt-unicode
+          - tmux
+          - screen
       tags:
         - shell
         - apt
@@ -95,7 +97,6 @@
           - pdftk-java
           - apt-file
           - apt-listchanges
-          - debian-keyring
           - needrestart
           - deborphan
           - enca
@@ -104,8 +105,6 @@
           - man-db
           - pass
           - jq
-          - man-db
-          - polkitd
       tags:
         - commandline
         - apt
@@ -116,7 +115,6 @@
           - git
           - vcsh
           - myrepos
-          - cloc
       tags:
         - vc
         - apt
@@ -131,7 +129,7 @@
         - cups
         - apt
 
-    - name: Stop and disable cups
+    - name: Disable now cups
       ansible.builtin.systemd:
         state: stopped
         enabled: false
@@ -291,7 +289,7 @@
         - xmonad
         - apt
 
-    - name: Install xmonad
+    - name: Install xmonad and utils
       ansible.builtin.apt:
         pkg:
           - libghc-xmonad-contrib-dev
@@ -325,7 +323,7 @@
         - browser
         - apt
 
-    - name: Install X11
+    - name: Install X11 utils
       ansible.builtin.apt:
         pkg:
           - tigervnc-viewer
@@ -343,6 +341,7 @@
           - ipython3
           - python3-pandas
           - virtualenvwrapper
+          - cloc
       tags:
         - python
         - apt
@@ -430,7 +429,6 @@
           max-cache-ttl 14401
           enable-ssh-support
           keep-display
-          #pinentry-program /usr/bin/pinentry-gtk-2
           pinentry-program /usr/bin/pinentry-curses
         create: true
         owner: domino
@@ -514,7 +512,7 @@
         update_cache: true
       tags: signal
 
-    - name: Create a dirs
+    - name: Create Downloads and fonts dirs
       ansible.builtin.file:
         path: "{{ item }}"
         owner: domino
