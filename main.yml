@@ -516,9 +516,8 @@
         name: systemd-networkd
       tags: systemd-network
 
-    - name: Disable now networking.service
+    - name: Disable networking.service
       ansible.builtin.systemd:
-        state: stopped
         enabled: false
         name: networking
       tags: systemd-network
@@ -637,10 +636,6 @@
         regexp: '^XKBOPTIONS='
         line: 'XKBOPTIONS="ctrl:nocaps"'
       tags: nocaps
-
-    - name: Reboot machine in 10 sec
-      ansible.builtin.reboot:
-        reboot_timeout: 10
 
   handlers:
     - name: Run update-initramfs
