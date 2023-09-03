@@ -12,6 +12,7 @@
     - vars/wireguard.yml
     - vars/network.yml
     - vars/urls.yml
+    - vars/syncthing.yml
   vars:
     home_dir: /home/domino
 
