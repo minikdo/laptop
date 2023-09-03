@@ -438,7 +438,7 @@
         state: directory
         owner: domino
         group: domino
-        mode: '0600'
+        mode: '0700'
       tags: gpg
 
     - name: Setup gpg-agent
@@ -452,6 +452,7 @@
           pinentry-program /usr/bin/pinentry-curses
         create: true
         owner: domino
+        group: domino
         mode: "0600"
       tags: gpg
 
