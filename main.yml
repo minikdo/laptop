@@ -364,6 +364,16 @@
         - syncthing
         - apt
 
+    - name: Copy srv-wisla id
+      ansible.builtin.copy:
+        dest: "{{ home_dir }}/syncthing-srv-wisla-id"
+        content: |
+          export SRVID="{{ syncthing_id }}"
+        owner: domino
+        group: domino
+        mode: '0600'
+      tags: syncthing
+
     - name: Install postfix
       ansible.builtin.apt:
         pkg:
@@ -433,6 +443,18 @@
         create: true
         owner: domino
         mode: "0600"
+      tags: gpg
+
+    - name: Copy gpg ssh-auth-sock helper script
+      ansible.builtin.copy:
+        dest: "{{ home_dir }}/ssh-auth-sock.sh"
+        content: |
+          export GPG_TTY="$(tty)"
+          export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+          gpg-connect-agent updatestartuptty /bye
+        owner: domino
+        group: domino
+        mode: '0750'
       tags: gpg
 
     - name: Configure wireguard network
