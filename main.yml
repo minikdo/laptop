@@ -432,6 +432,15 @@
           - pcscd
       tags: gpg
 
+    - name: Create gnupg dir
+      ansible.builtin.file:
+        path: "{{ home_dir }}/.gnupg"
+        state: directory
+        owner: domino
+        group: domino
+        mode: '0600'
+      tags: gpg
+
     - name: Setup gpg-agent
       ansible.builtin.blockinfile:
         path: "{{ home_dir }}/.gnupg/gpg-agent.conf"
