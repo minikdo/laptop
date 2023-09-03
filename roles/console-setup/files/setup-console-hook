@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# /etc/initramfs-tools/hooks/setup-console
+
+case $1 in
+prereqs)
+     echo ''
+     exit 0
+     ;;
+esac
+
+. /usr/share/initramfs-tools/hook-functions
+# Begin real processing below this line
+
+copy_exec /bin/setfont
+cp /etc/console-setup/cached_Lat2-TerminusBold28x14.psf.gz "$DESTDIR"/etc/console-font.psf.gz

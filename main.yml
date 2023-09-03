@@ -53,7 +53,7 @@
           - wireguard
           - debian-keyring
           - polkitd
-     tags:
+      tags:
         - basic
         - apt
 
@@ -546,6 +546,7 @@
       ansible.builtin.git:
         repo: https://github.com/ohmyzsh/ohmyzsh.git
         dest: "{{ home_dir }}/.oh-my-zsh"
+        version: master
       become_user: domino
       tags: ohmyzsh
 
@@ -574,6 +575,30 @@
         mode: '0644'
       tags: polkit
 
+    - name: Copy console-setup fonts
+      ansible.builtin.copy:
+        src: roles/console-setup/files/cached_Lat2-TerminusBold28x14.psf.gz
+        dest: /etc/console-setup/cached_Lat2-TerminusBold28x14.psf.gz
+        owner: root
+        group: root
+        mode: '0644'
+      tags: console-setup
+
+    - name: Copy console fonts hook
+      ansible.builtin.copy:
+        src: roles/console-setup/files/setup-console-hook
+        dest: /etc/initramfs-tools/hooks/setup-console-hook
+        mode: "0744"
+      tags: console-setup
+
+    - name: Copy console fonts init-top script
+      ansible.builtin.copy:
+        src: roles/console-setup/files/setup-console-init-top
+        dest: /etc/initramfs-tools/scripts/init-top/setup-console-init-top
+        mode: "0744"
+      tags: console-setup
+      notify: Run update-initramfs
+
     - name: Set keyboard default
       ansible.builtin.lineinfile:
         path: /etc/default/keyboard
@@ -584,3 +609,9 @@
     - name: Reboot machine in 10 sec
       ansible.builtin.reboot:
         reboot_timeout: 10
+
+  handlers:
+    - name: Run update-initramfs
+      ansible.builtin.command: update-initramfs -u
+      register: update_output
+      changed_when: update_output.rc == 0
