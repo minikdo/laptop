@@ -54,6 +54,8 @@
           - wireguard
           - debian-keyring
           - polkitd
+          - systemd-resolved
+          - systemd-timesyncd
       tags:
         - basic
         - apt
@@ -67,6 +69,8 @@
           - rsyslog
           - bluetooth
           - bluez
+          - isc-dhcp-client
+          - isc-dhcp-common
         state: absent
 
     - name: Install shell, terminals and multiplexers
@@ -91,6 +95,7 @@
           - gdu
           - fzf
           - mc
+          - mailcap
           - pmount
           - zip
           - unzip
@@ -283,6 +288,7 @@
           - x11-xserver-utils
           - x11-utils
           - x11-common
+          - xclip
           - slim
           - xbacklight
       tags:
@@ -311,6 +317,7 @@
           - breeze-cursor-theme
           - arc-theme
           - lxappearance
+          - pcmanfm
       tags:
         - xmonad
         - apt
@@ -320,6 +327,7 @@
         pkg:
           - firefox-esr
           - chromium
+          - webext-browserpass
       tags:
         - browser
         - apt
@@ -341,6 +349,7 @@
           - python3
           - ipython3
           - python3-pandas
+          - python3-tabulate
           - virtualenvwrapper
           - cloc
       tags:
