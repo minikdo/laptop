@@ -111,6 +111,7 @@
           - man-db
           - pass
           - jq
+          - postgresql-client
       tags:
         - commandline
         - apt
