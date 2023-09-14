@@ -112,6 +112,10 @@
           - pass
           - jq
           - postgresql-client
+          - direnv
+          - htop
+          - sm
+          - metar
       tags:
         - commandline
         - apt
@@ -340,6 +344,7 @@
           - simple-scan
           - evolution-data-server
           - gnome-calendar
+          - desktop-file-utils
       tags:
         - vnc
         - apt
@@ -357,12 +362,28 @@
         - python
         - apt
 
+    - name: Install packaging tools
+      ansible.builtin.apt:
+        pkg:
+          - dpkg-dev
+          - dput
+          - devscripts
+          - lintian
+          - debian-policy
+          - git-buildpackage
+          - pristine-tar
+      tags:
+        - packaging
+        - apt
+
     - name: Install texlive
       ansible.builtin.apt:
         pkg:
           - texlive-latex-extra
           - texlive-latex-recommended
           - texlive-xetex
+          - texlive-fonts-extra
+          - texlive-fonts-recommended
       tags:
         - texlive
         - apt
@@ -553,6 +574,11 @@
         pkg: signal-desktop-beta
         update_cache: true
       tags: signal
+
+    - name: Install fonts
+      ansible.builtin.apt:
+        pkg: fonts-takao
+      tags: fonts
 
     - name: Create Downloads and fonts dirs
       ansible.builtin.file:
