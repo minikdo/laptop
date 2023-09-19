@@ -329,6 +329,16 @@
         - xmonad
         - apt
 
+    - name: Install pulseaudio
+      ansible.builtin.apt:
+        pkg:
+          - pulseaudio
+          - pulseaudio-utils
+          - pavucontrol
+      tags:
+        - pulseaudio
+        - apt
+
     - name: Install web browsers
       ansible.builtin.apt:
         pkg:
