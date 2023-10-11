@@ -459,6 +459,27 @@
         mode: "0644"
       tags: journald
 
+    - name: Set logind hibernation
+      ansible.builtin.blockinfile:
+        path: /etc/systemd/logind.conf.d/hibernate.conf
+        block: |
+          [Login]
+          HandleLidSwitch=suspend-then-hibernate
+          HandleSuspendKey=suspend-then-hibernate
+        create: true
+        mode: "0644"
+      tags: hibernate
+
+    - name: Set sleep hibernation
+      ansible.builtin.blockinfile:
+        path: /etc/systemd/sleep.conf.d/hibernate.conf
+        block: |
+          [Sleep]
+          HibernateDelaySec=120m
+        create: true
+        mode: "0644"
+      tags: hibernate
+
     - name: Install yubikey tools
       ansible.builtin.apt:
         pkg:
