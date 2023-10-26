@@ -409,7 +409,7 @@
         - syncthing
         - apt
 
-    - name: Copy srv-wisla id
+    - name: Copy syncthing srv-wisla id
       ansible.builtin.copy:
         dest: "{{ home_dir }}/syncthing-srv-wisla-id"
         content: |
@@ -459,7 +459,7 @@
         mode: "0644"
       tags: journald
 
-    - name: Set logind hibernation
+    - name: Set systemd-logind hibernation
       ansible.builtin.blockinfile:
         path: /etc/systemd/logind.conf.d/hibernate.conf
         block: |
@@ -470,7 +470,7 @@
         mode: "0644"
       tags: hibernate
 
-    - name: Set sleep hibernation
+    - name: Set hibernate delay to 120m after suspend
       ansible.builtin.blockinfile:
         path: /etc/systemd/sleep.conf.d/hibernate.conf
         block: |
