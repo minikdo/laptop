@@ -271,6 +271,7 @@
           - fgallery
           - mpv
           - ffmpeg
+          - mkvtoolnix-gui
           - mat2
           - scrot
           - zbar-tools
