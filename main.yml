@@ -709,6 +709,16 @@
         line: 'XKBOPTIONS="ctrl:nocaps"'
       tags: nocaps
 
+    - name: Update tuptime timer
+      ansible.builtin.blockinfile:
+        path: /etc/systemd/system/tuptime-sync.timer.d/override.conf
+        block: |
+          [Timer]
+          OnCalendar=
+          OnCalendar=hourly
+        create: true
+      tags: tuptime
+
   handlers:
     - name: Run update-initramfs
       ansible.builtin.command: update-initramfs -u
