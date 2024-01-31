@@ -634,7 +634,7 @@
         mode: '0644'
         owner: domino
         group: domino
-        checksum: sha256:29e4827a820a5ed66d7c3634e17bbb36b6308c6e92d5a801c48fc867acf97c24
+        checksum: sha256:2fc90fedf4f6b9e92919d8643fc71f12f0c71f9f208e5643050a018b7070a65a
       tags: iosevka
 
     - name: Extract iosevka.zip
