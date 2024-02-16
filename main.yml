@@ -477,7 +477,7 @@
         path: /etc/systemd/sleep.conf.d/hibernate.conf
         block: |
           [Sleep]
-          HibernateDelaySec=120m
+          HibernateDelaySec=180m
         create: true
         mode: "0644"
       tags: hibernate
