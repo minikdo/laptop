@@ -347,6 +347,9 @@
           - firefox-esr
           - chromium
           - webext-browserpass
+          - webext-foxyproxy
+          - webext-ublock-origin-chromium
+          - webext-ublock-origin-firefox
       tags:
         - browser
         - apt
