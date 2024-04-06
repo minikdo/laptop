@@ -162,7 +162,7 @@
           - socat
           - bind9-dnsutils
       tags:
-        - network
+        - networking
         - apt
 
     - name: Install mail and chat utils
@@ -472,7 +472,7 @@
         mode: "0644"
       tags: hibernate
 
-    - name: Set hibernate delay to 120m after suspend
+    - name: Set hibernate delay
       ansible.builtin.blockinfile:
         path: /etc/systemd/sleep.conf.d/hibernate.conf
         block: |
