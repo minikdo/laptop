@@ -64,8 +64,8 @@
           - systemd-resolved
           - systemd-timesyncd
       tags:
-        - basic
         - apt
+        - basic
 
     - name: Remove avahi and rsyslog
       ansible.builtin.apt:
@@ -79,6 +79,8 @@
           - isc-dhcp-client
           - isc-dhcp-common
         state: absent
+      tags:
+        - apt
 
     - name: Install shell, terminals and multiplexers
       ansible.builtin.apt:
@@ -89,8 +91,8 @@
           - tmux
           - screen
       tags:
-        - shell
         - apt
+        - shell
 
     - name: Install command-line tools
       ansible.builtin.apt:
@@ -125,8 +127,8 @@
           - metar
           - ncal
       tags:
-        - commandline
         - apt
+        - commandline
 
     - name: Install version control tools
       ansible.builtin.apt:
@@ -135,8 +137,8 @@
           - vcsh
           - myrepos
       tags:
-        - vc
         - apt
+        - vc
 
     - name: Install cups
       ansible.builtin.apt:
@@ -145,8 +147,9 @@
           - cups-client
           - cups-bsd
       tags:
-        - cups
         - apt
+        - cups
+        - extra
 
     - name: Disable now cups
       ansible.builtin.systemd:
@@ -169,8 +172,9 @@
           - socat
           - bind9-dnsutils
       tags:
-        - networking
         - apt
+        - networking
+        - extra
 
     - name: Install mail and chat utils
       ansible.builtin.apt:
@@ -186,8 +190,8 @@
           - mblaze
           - w3m
       tags:
-        - mail
         - apt
+        - mail
 
     - name: Install emacs and elpa pkgs
       ansible.builtin.apt:
@@ -231,9 +235,9 @@
           - elpa-yasnippet
           - elpa-yasnippet-snippets
       tags:
+        - apt
         - emacs
         - elpa
-        - apt
 
     - name: Install dictionaries
       ansible.builtin.apt:
@@ -243,9 +247,9 @@
           - aspell-pl
           - myspell-pl
       tags:
+        - apt
         - emacs
         - dict
-        - apt
 
     - name: Install debuggers
       ansible.builtin.apt:
@@ -254,8 +258,9 @@
           - ltrace
           - binwalk
       tags:
-        - debug
         - apt
+        - debug
+        - extra
 
     - name: Install virtualization tools
       ansible.builtin.apt:
@@ -263,13 +268,13 @@
           - systemd-container
           - debootstrap
       tags:
-        - virt
         - apt
+        - virt
+        - extra
 
     - name: Install media utils
       ansible.builtin.apt:
         pkg:
-          - feh
           - viewnior
           - evince
           - gimp
@@ -285,8 +290,9 @@
           - genisoimage
           - wodim
       tags:
-        - media
         - apt
+        - media
+        - extra
 
     - name: Install xorg
       ansible.builtin.apt:
@@ -306,10 +312,11 @@
           - slim
           - xbacklight
           - wmctrl
+          - feh
       tags:
+        - apt
         - xorg
         - xmonad
-        - apt
 
     - name: Install xmonad and utils
       ansible.builtin.apt:
@@ -335,8 +342,8 @@
           - pcmanfm
           - vainfo
       tags:
-        - xmonad
         - apt
+        - xmonad
 
     - name: Install pulseaudio
       ansible.builtin.apt:
@@ -345,8 +352,8 @@
           - pulseaudio-utils
           - pavucontrol
       tags:
-        - pulseaudio
         - apt
+        - pulseaudio
 
     - name: Install web browsers
       ansible.builtin.apt:
@@ -358,8 +365,8 @@
           - webext-ublock-origin-chromium
           - webext-ublock-origin-firefox
       tags:
-        - browser
         - apt
+        - browser
 
     - name: Install X11 utils
       ansible.builtin.apt:
@@ -370,8 +377,9 @@
           - gnome-calendar
           - desktop-file-utils
       tags:
-        - vnc
         - apt
+        - vnc
+        - extra
 
     - name: Install python
       ansible.builtin.apt:
@@ -383,8 +391,9 @@
           - virtualenvwrapper
           - cloc
       tags:
-        - python
         - apt
+        - python
+        - extra
 
     - name: Install packaging tools
       ansible.builtin.apt:
@@ -398,8 +407,9 @@
           - git-buildpackage
           - pristine-tar
       tags:
-        - packaging
         - apt
+        - packaging
+        - extra
 
     - name: Install texlive
       ansible.builtin.apt:
@@ -410,16 +420,18 @@
           - texlive-fonts-extra
           - texlive-fonts-recommended
       tags:
-        - texlive
         - apt
+        - texlive
+        - extra
 
     - name: Install syncthing
       ansible.builtin.apt:
         pkg:
           - syncthing
       tags:
-        - syncthing
         - apt
+        - syncthing
+        - extra
 
     - name: Copy syncthing srv-wisla id
       ansible.builtin.copy:
@@ -437,8 +449,9 @@
           - postfix
           - libsasl2-2
       tags:
-        - postfix
         - apt
+        - postfix
+        - extra
 
     - name: Configure postfix
       ansible.builtin.copy:
@@ -497,7 +510,10 @@
         pkg:
           - yubikey-manager
           - libpam-yubico
-      tags: yubico
+      tags:
+        - apt
+        - yubico
+        - extra
 
     - name: Install gpg
       ansible.builtin.apt:
@@ -507,7 +523,9 @@
           - pinentry-gtk2
           - scdaemon
           - pcscd
-      tags: gpg
+      tags:
+        - apt
+        - gpg
 
     - name: Create gnupg dir
       ansible.builtin.file:
@@ -623,8 +641,12 @@
 
     - name: Install fonts
       ansible.builtin.apt:
-        pkg: fonts-takao
-      tags: fonts
+        pkg:
+          - fonts-takao
+      tags:
+        - apt
+        - fonts
+        - extra
 
     - name: Create Downloads and fonts dirs
       ansible.builtin.file:
@@ -636,7 +658,9 @@
       loop:
         - "{{ home_dir }}/Downloads"
         - "{{ home_dir }}/.local/share/fonts/truetype/iosevka"
-      tags: iosevka
+      tags:
+        - fonts
+        - iosevka
 
     - name: Download iosevka fonts
       ansible.builtin.get_url:
@@ -646,7 +670,9 @@
         owner: domino
         group: domino
         checksum: sha256:2fc90fedf4f6b9e92919d8643fc71f12f0c71f9f208e5643050a018b7070a65a
-      tags: iosevka
+      tags:
+        - fonts
+        - iosevka
 
     - name: Extract iosevka.zip
       ansible.builtin.unarchive:
@@ -654,7 +680,9 @@
         dest: "{{ home_dir }}/.local/share/fonts/truetype/iosevka"
         owner: domino
         group: domino
-      tags: iosevka
+      tags:
+        - fonts
+        - iosevka
 
     - name: Install oh-my-zsh
       ansible.builtin.git:
