@@ -46,6 +46,13 @@
         mode: "0644"
       tags: aptconf
 
+    - name: Configure grub
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        regexp: '^GRUB_CMDLINE_LINUX='
+        line: 'GRUB_CMDLINE_LINUX="loglevel=1 rd.systemd.show_status=auto rd.udev.log_priority=1"'
+      tags: grub
+
     - name: Install basic tools
       ansible.builtin.apt:
         pkg:
