@@ -728,6 +728,7 @@
           OnCalendar=
           OnCalendar=hourly
         create: true
+        mode: "0644"
       tags: tuptime
 
   handlers:
