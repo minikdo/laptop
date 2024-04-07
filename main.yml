@@ -359,7 +359,6 @@
       ansible.builtin.apt:
         pkg:
           - firefox-esr
-          - chromium
           - webext-browserpass
           - webext-foxyproxy
           - webext-ublock-origin-chromium
