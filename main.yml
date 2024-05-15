@@ -46,12 +46,22 @@
         mode: "0644"
       tags: aptconf
 
-    - name: Configure grub
+    - name: Configure grub timeout
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        regexp: '^GRUB_TIMEOUT='
+        line: 'GRUB_TIMEOUT=1"'
+      tags:
+        - grub
+
+    - name: Configure grub cmdline linux
       ansible.builtin.lineinfile:
         path: /etc/default/grub
         regexp: '^GRUB_CMDLINE_LINUX='
         line: 'GRUB_CMDLINE_LINUX="loglevel=1 rd.systemd.show_status=auto rd.udev.log_priority=1"'
-      tags: grub
+      tags:
+        - grub
+      notify: Run update-grub
 
     - name: Install basic tools
       ansible.builtin.apt:
@@ -758,8 +768,44 @@
         mode: "0644"
       tags: tuptime
 
+    - name: Add udev rules for ybacklight
+      ansible.builtin.blockinfile:
+        path: /etc/udev/rules.d/90-ybacklight.rules
+        block: |
+          ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness"
+          ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"
+        create: true
+        owner: root
+        group: root
+        mode: "0644"
+      tags:
+        - ybacklight
+
+    - name: Creates MAILTO env on top of crontab
+      ansible.builtin.cron:
+        name: MAILTO
+        env: yes
+        job: "do@minik.pl"
+        user: domino
+      tags:
+        - cron
+
+    - name: create test crontab for user
+      ansible.builtin.cron:
+        name: "test task"
+        special_time: "reboot"
+        job: "touch /tmp/crontab_test_touch"
+        user: domino
+      tags:
+        - cron
+
   handlers:
     - name: Run update-initramfs
       ansible.builtin.command: update-initramfs -u
+      register: update_output
+      changed_when: update_output.rc == 0
+
+    - name: Run update-grub
+      ansible.builtin.command: update-grub
       register: update_output
       changed_when: update_output.rc == 0
