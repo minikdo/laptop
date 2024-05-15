@@ -88,6 +88,7 @@
           - bluez
           - isc-dhcp-client
           - isc-dhcp-common
+          - ifupdown
         state: absent
       tags:
         - apt
@@ -112,7 +113,6 @@
           - ack
           - ripgrep
           - gdu
-          - fzf
           - mc
           - mailcap
           - pmount
@@ -123,7 +123,6 @@
           - apt-file
           - apt-listchanges
           - needrestart
-          - deborphan
           - enca
           - secure-delete
           - tzwatch
@@ -131,6 +130,7 @@
           - pass
           - jq
           - postgresql-client
+          - sqlite3
           - direnv
           - htop
           - sm
@@ -255,7 +255,7 @@
           - aspell
           - aspell-en
           - aspell-pl
-          - myspell-pl
+#          - myspell-pl
       tags:
         - apt
         - emacs
@@ -289,6 +289,7 @@
           - evince
           - gimp
           - gimp-gmic
+          - librsvg2-common  # gimp icons
           - imagemagick
           - fgallery
           - mpv
@@ -385,6 +386,7 @@
           - evolution-data-server
           - gnome-calendar
           - desktop-file-utils
+          - sqlitebrowser
       tags:
         - apt
         - vnc
@@ -397,6 +399,7 @@
           - ipython3
           - python3-pandas
           - python3-tabulate
+          - python3-requests
           - virtualenvwrapper
           - cloc
       tags:
@@ -457,6 +460,7 @@
         pkg:
           - postfix
           - libsasl2-2
+          - libsasl2-modules
       tags:
         - apt
         - postfix
@@ -531,7 +535,7 @@
           - gpg-agent
           - pinentry-gtk2
           - scdaemon
-          - pcscd
+          # - pcscd
       tags:
         - apt
         - gpg
