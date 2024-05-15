@@ -751,6 +751,14 @@
         mode: '0755'
       tags: nftables
 
+    - name: Enable nftables
+      ansible.builtin.systemd:
+        state: started
+        enabled: true
+        name: nftables
+      tags:
+        - nftables
+
     - name: Copy polkit rules
       ansible.builtin.copy:
         src: roles/polkit/files/50-local-allow.rules
