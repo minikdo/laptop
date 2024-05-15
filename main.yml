@@ -166,7 +166,19 @@
         state: stopped
         enabled: false
         name: cups
-      tags: cups
+      tags:
+        - cups
+        - extra
+
+    - name: Add the user domino to lp groups
+      ansible.builtin.user:
+        name: domino
+        shell: /bin/zsh
+        groups: lp,lpadmin
+        append: true
+      tags:
+        - cups
+        - extra
 
     - name: Install networking tools
       ansible.builtin.apt:
@@ -727,7 +739,7 @@
       ansible.builtin.user:
         name: domino
         shell: /bin/zsh
-        groups: sudo,adm,systemd-journal,lp,lpadmin
+        groups: sudo,adm,systemd-journal
         append: true
 
     - name: Copy nftables
