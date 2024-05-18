@@ -475,7 +475,7 @@
         mode: '0644'
       tags:
         - fzf
-        
+
     - name: Install syncthing
       ansible.builtin.apt:
         pkg:
@@ -836,13 +836,13 @@
     - name: Creates MAILTO env on top of crontab
       ansible.builtin.cron:
         name: MAILTO
-        env: yes
+        env: true
         job: "do@minik.pl"
         user: domino
       tags:
         - cron
 
-    - name: create test crontab for user
+    - name: Create test crontab for user
       ansible.builtin.cron:
         name: "test task"
         special_time: "reboot"
