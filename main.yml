@@ -156,6 +156,7 @@
           - cups
           - cups-client
           - cups-bsd
+          - printer-driver-foo2zjs
       tags:
         - apt
         - cups
@@ -238,6 +239,8 @@
           - elpa-ht
           - elpa-jinja2-mode
           - elpa-lsp-mode
+          - python3-pylsp  # for lsp-mode
+          - elpa-flycheck
           - elpa-lv
           - elpa-markdown-mode
           - elpa-modus-themes
@@ -246,6 +249,8 @@
           - elpa-popup
           - elpa-projectile
           - elpa-rainbow-mode
+          - elpa-redtick
+          - sox  # for redtick sounds
           - elpa-s
           - elpa-smex
           - elpa-spinner
@@ -412,6 +417,10 @@
           - python3-pandas
           - python3-tabulate
           - python3-requests
+          - python3-notify2
+          - python3-flake8
+          - flake8
+          - pylint
           - virtualenvwrapper
           - cloc
       tags:
@@ -443,6 +452,7 @@
           - texlive-xetex
           - texlive-fonts-extra
           - texlive-fonts-recommended
+          - texlive-plain-generic
       tags:
         - apt
         - texlive
