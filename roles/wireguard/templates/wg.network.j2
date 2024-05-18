@@ -6,7 +6,7 @@ Address={{ ip[hostvars['localhost'].ansible_hostname][item] }}/24
 LLMNR=false
 MulticastDNS=false
 DNS={{ dns[item] }}
-DNSSEC=Yes
+DNSSEC=allow-downgrade
 #DNSDefaultRoute=no
 Domains={{ domains[item] }}
 
