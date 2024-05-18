@@ -589,7 +589,7 @@
         mode: '0700'
       tags: gpg
 
-    - name: Setup gpg-agent
+    - name: Setup temporary gpg-agent
       ansible.builtin.blockinfile:
         path: "{{ home_dir }}/.gnupg/gpg-agent.conf"
         block: |
@@ -608,7 +608,7 @@
       ansible.builtin.copy:
         dest: "{{ home_dir }}/ssh-auth-sock.sh"
         content: |
-          export GPG_TTY="$(tty)"
+          export GPG_TTY=\"$(tty)\"
           export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
           gpg-connect-agent updatestartuptty /bye
         owner: domino
