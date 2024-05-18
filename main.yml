@@ -713,7 +713,6 @@
         - "{{ home_dir }}/.local/share/fonts/truetype/iosevka"
       tags:
         - fonts
-        - iosevka
 
     - name: Download iosevka fonts
       ansible.builtin.get_url:
@@ -722,10 +721,9 @@
         mode: '0644'
         owner: domino
         group: domino
-        checksum: sha256:2fc90fedf4f6b9e92919d8643fc71f12f0c71f9f208e5643050a018b7070a65a
+        checksum: sha256:"{{ iosevka_fonts_sha256 }}"
       tags:
         - fonts
-        - iosevka
 
     - name: Extract iosevka.zip
       ansible.builtin.unarchive:
@@ -735,7 +733,26 @@
         group: domino
       tags:
         - fonts
-        - iosevka
+
+    - name: Download nerd_symbols fonts
+      ansible.builtin.get_url:
+        url: "{{ nerd_symbols_fonts_url }}"
+        dest: "{{ home_dir }}/Downloads/nerd_symbols.zip"
+        mode: '0644'
+        owner: domino
+        group: domino
+        checksum: sha256:"{{ nerd_symbols_fonts_sha256 }}"
+      tags:
+        - fonts
+
+    - name: Extract nerd_symbols.zip
+      ansible.builtin.unarchive:
+        src: "{{ home_dir }}/Downloads/nerd_symbols.zip"
+        dest: "{{ home_dir }}/.local/share/fonts/truetype/nerd_symbols"
+        owner: domino
+        group: domino
+      tags:
+        - fonts
 
     - name: Install oh-my-zsh
       ansible.builtin.git:
