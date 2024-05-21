@@ -108,34 +108,35 @@
     - name: Install command-line tools
       ansible.builtin.apt:
         pkg:
-          - psmisc
-          - px
           - ack
-          - ripgrep
-          - gdu
-          - mc
-          - mailcap
-          - pmount
-          - zip
-          - unzip
-          - dosfstools
-          - pdftk-java
           - apt-file
           - apt-listchanges
-          - needrestart
-          - enca
-          - secure-delete
-          - tzwatch
-          - man-db
-          - pass
-          - jq
-          - postgresql-client
-          - sqlite3
           - direnv
+          - dosfstools
+          - enca
+          - gdu
           - htop
-          - sm
+          - jq
+          - lsof
+          - mailcap
+          - man-db
+          - mc
           - metar
           - ncal
+          - needrestart
+          - pass
+          - pdftk-java
+          - pmount
+          - postgresql-client
+          - psmisc
+          - px
+          - ripgrep
+          - secure-delete
+          - sm
+          - sqlite3
+          - tzwatch
+          - unzip
+          - zip
       tags:
         - apt
         - commandline
