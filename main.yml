@@ -873,11 +873,20 @@
       tags:
         - cron
 
-    - name: Create test crontab for user
+    - name: Create a crontab to backup tuptime db
       ansible.builtin.cron:
-        name: "test task"
+        name: "tuptime db backup task"
         special_time: "reboot"
         job: "cp /var/lib/tuptime/tuptime.db $BACKUPDIR/x1-tuptime.db"
+        user: domino
+      tags:
+        - cron
+
+    - name: Create a crontab to /etc/hosts
+      ansible.builtin.cron:
+        name: "hosts backup task"
+        special_time: "reboot"
+        job: "cp /etc/hosts $BACKUPDIR/hosts"
         user: domino
       tags:
         - cron
