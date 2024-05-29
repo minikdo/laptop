@@ -868,7 +868,7 @@
       ansible.builtin.cron:
         name: BACKUPDIR
         env: true
-        job: "~/syncthing/backup"
+        job: "{{ home_dir }}/syncthing/backup"
         user: domino
       tags:
         - cron
