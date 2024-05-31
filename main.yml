@@ -366,6 +366,7 @@
           - dunst
           - unclutter
           - parcellite
+          - autorandr
           - breeze-cursor-theme
           - lxappearance
           - pcmanfm
