@@ -261,6 +261,7 @@
           - elpa-virtualenvwrapper
           - elpa-web-mode
           - elpa-which-key
+          - elpa-ws-butler
           - elpa-yaml-mode
           - elpa-yasnippet
           - elpa-yasnippet-snippets
