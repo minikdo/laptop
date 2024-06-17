@@ -755,7 +755,7 @@
     - name: Extract nerd_symbols.zip
       ansible.builtin.unarchive:
         src: "{{ home_dir }}/Downloads/nerd_symbols.zip"
-        dest: "{{ home_dir }}/.local/share/fonts/truetype/nerd_symbols"
+        dest: "{{ home_dir }}/.local/share/fonts/truetype/nerd_symbols/"
         owner: domino
         group: domino
       tags:
