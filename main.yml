@@ -582,7 +582,7 @@
           - gpg-agent
           - pinentry-gtk2
           - scdaemon
-          # - pcscd
+          - pcscd
       tags:
         - apt
         - gpg
