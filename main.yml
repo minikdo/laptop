@@ -477,7 +477,7 @@
     - name: Copy fzf key-bindings.zsh
       ansible.builtin.copy:
         src: /usr/share/doc/fzf/examples/key-bindings.zsh
-        dest: "{{ home_dir }}/.config/fzf"
+        dest: "{{ home_dir }}/.config/fzf/"
         owner: domino
         group: domino
         mode: '0644'
@@ -512,7 +512,6 @@
       tags:
         - apt
         - postfix
-        - extra
 
     - name: Configure postfix
       ansible.builtin.copy:
@@ -744,12 +743,12 @@
 
     - name: Download nerd_symbols fonts
       ansible.builtin.get_url:
-        url: "{{ nerd_symbols_fonts_url }}"
+        url: "{{ nerd_symbols_url }}"
         dest: "{{ home_dir }}/Downloads/nerd_symbols.zip"
         mode: '0644'
         owner: domino
         group: domino
-        checksum: sha256:"{{ nerd_symbols_fonts_sha256 }}"
+        checksum: sha256:"{{ nerd_symbols_sha256 }}"
       tags:
         - fonts
 
