@@ -881,7 +881,7 @@
       ansible.builtin.cron:
         name: "tuptime db backup task"
         special_time: "reboot"
-        job: "cp /var/lib/tuptime/tuptime.db $BACKUPDIR/x1-tuptime.db"
+        job: "cp /var/lib/tuptime/tuptime.db $BACKUPDIR/$(hostname)_tuptime.db"
         user: domino
       tags:
         - cron
@@ -890,7 +890,7 @@
       ansible.builtin.cron:
         name: "hosts backup task"
         special_time: "reboot"
-        job: "cp /etc/hosts $BACKUPDIR/hosts"
+        job: "cp /etc/hosts $BACKUPDIR/$(hostname)_hosts"
         user: domino
       tags:
         - cron
