@@ -50,7 +50,7 @@
       ansible.builtin.lineinfile:
         path: /etc/default/grub
         regexp: '^GRUB_TIMEOUT='
-        line: 'GRUB_TIMEOUT=1"'
+        line: 'GRUB_TIMEOUT=1'
       tags:
         - grub
 
