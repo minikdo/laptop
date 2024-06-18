@@ -340,6 +340,7 @@
           - x11-xserver-utils
           - x11-utils
           - x11-common
+          - xauth
           - xclip
           - slim
           - xbacklight
