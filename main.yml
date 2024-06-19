@@ -458,6 +458,7 @@
         pkg:
           - texlive-latex-extra
           - texlive-latex-recommended
+          - texlive-extra-utils
           - texlive-xetex
           - texlive-fonts-extra
           - texlive-fonts-recommended
