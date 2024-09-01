@@ -101,6 +101,7 @@
           - rxvt-unicode
           - tmux
           - screen
+          - bash-completion
       tags:
         - apt
         - shell
@@ -319,6 +320,7 @@
           - mat2
           - scrot
           - zbar-tools
+          - qrencode
           - genisoimage
           - wodim
       tags:
@@ -364,6 +366,7 @@
           - xmobar
           - suckless-tools
           - xss-lock
+          - xtrlock
           - redshift
           - concalc
           - dunst
@@ -374,6 +377,7 @@
           - lxappearance
           - pcmanfm
           - vainfo
+          - libnotify-bin
       tags:
         - apt
         - xmonad
