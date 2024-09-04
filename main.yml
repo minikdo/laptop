@@ -71,7 +71,7 @@
           - wireguard
           - debian-keyring
           - polkitd
-          - systemd-resolved
+          # - systemd-resolved
           - systemd-timesyncd
       tags:
         - apt
