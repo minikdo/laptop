@@ -299,6 +299,7 @@
         pkg:
           - systemd-container
           - debootstrap
+          - docker-cli
       tags:
         - apt
         - virt
@@ -343,8 +344,10 @@
           - x11-utils
           - x11-common
           - xauth
+          - xinit
           - xclip
           - slim
+          - picom
           - xbacklight
           - wmctrl
           - feh
