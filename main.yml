@@ -620,6 +620,19 @@
         mode: "0600"
       tags: gpg
 
+    - name: Setup temporary scdaemon.conf
+      ansible.builtin.blockinfile:
+        path: "{{ home_dir }}/.gnupg/scdaemon.conf"
+        block: |
+          pcsc-driver /usr/lib/x86_64-linux-gnu/libpcsclite.so.1
+          card-timeout 5
+          disable-ccid
+        create: true
+        owner: domino
+        group: domino
+        mode: "0600"
+      tags: gpg
+
     - name: Copy gpg ssh-auth-sock helper script
       ansible.builtin.copy:
         dest: "{{ home_dir }}/ssh-auth-sock.sh"
@@ -630,7 +643,26 @@
         owner: domino
         group: domino
         mode: '0750'
-      tags: gpg
+      tags: helper
+
+    - name: Create EAP wpa example
+      ansible.builtin.copy:
+        dest: "{{ home_dir }}/wpa_supplicant_eap.conf"
+        content: |
+          network={
+              ssid="Connectionlost_5"
+              key_mgmt=WPA-EAP IEEE8021X
+              eap=TTLS
+              identity=""
+              password=""
+              ca_cert="/etc/wpa_supplicant/certs/dominowisla.pem"
+              phase2="auth=MSCHAPV2"
+              mesh_fwding=1
+          }
+        owner: domino
+        group: domino
+        mode: '0750'
+      tags: helper
 
     - name: Configure wireguard network
       ansible.builtin.template:
