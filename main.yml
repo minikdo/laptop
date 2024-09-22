@@ -112,6 +112,7 @@
           - ack
           - apt-file
           - apt-listchanges
+          - autossh
           - direnv
           - dosfstools
           - enca
