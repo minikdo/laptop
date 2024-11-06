@@ -745,6 +745,7 @@
       ansible.builtin.apt:
         pkg:
           - fonts-takao
+          - fonts-noto-color-emoji
       tags:
         - apt
         - fonts
