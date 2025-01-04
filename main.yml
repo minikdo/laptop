@@ -436,6 +436,7 @@
           - python3-flake8
           - python3-bs4
           - python3-lxml
+          - python3-mt940
           - flake8
           - pylint
           - virtualenvwrapper
