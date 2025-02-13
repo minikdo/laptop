@@ -544,6 +544,7 @@
           smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
           smtp_sasl_security_options =
           smtpd_relay_restrictions = reject_unauth_destination
+          message_size_limit = 20000000
         mode: "0644"
       tags: postfix
 
