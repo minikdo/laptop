@@ -227,6 +227,7 @@
         pkg:
           - emacs-gtk
           - dh-elpa-helper
+          - elpa-apache-mode
           - elpa-bind-key
           - elpa-clues-theme
           - elpa-company
