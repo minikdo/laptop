@@ -71,6 +71,7 @@
           - tuptime
           - wireguard
           - debian-keyring
+          - signing-party
           - polkitd
           # - systemd-resolved
           - systemd-timesyncd
@@ -252,6 +253,7 @@
           - elpa-lv
           - elpa-markdown-mode
           - elpa-modus-themes
+          - elpa-nginx-mode
           - elpa-org-bullets
           - elpa-paredit
           - elpa-popup
@@ -316,6 +318,8 @@
           - evince
           - gimp
           - gimp-gmic
+          - gimagereader
+          - tesseract-ocr-pol
           - librsvg2-common  # gimp icons
           - imagemagick
           - fgallery
@@ -418,6 +422,7 @@
         pkg:
           - tigervnc-viewer
           - simple-scan
+          - sane-utils
           - evolution-data-server
           - gnome-calendar
           - desktop-file-utils
