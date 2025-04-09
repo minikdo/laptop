@@ -283,7 +283,6 @@
           - aspell
           - aspell-en
           - aspell-pl
-#          - myspell-pl
       tags:
         - apt
         - emacs
