@@ -838,6 +838,7 @@
         repo: https://github.com/ohmyzsh/ohmyzsh.git
         dest: "{{ home_dir }}/.oh-my-zsh"
         version: master
+      become: true
       become_user: domino
       tags: ohmyzsh
 
