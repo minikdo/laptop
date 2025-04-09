@@ -732,9 +732,22 @@
     - name: Download signal gpg key
       ansible.builtin.get_url:
         url: "{{ signal_keyring_url }}"
-        dest: /usr/share/keyrings/signal-desktop-keyring.gpg
+        dest: "{{ home_dir }}/Downloads/signal-keys.asc"
         mode: '0644'
-        checksum: sha256:efff7943ad544a2a10e10e232e695b6e7888348fb95f1deff2085fd8cab67e32
+        checksum: sha256:"{{ signal_keyring_sha256 }}"
+      tags: signal
+
+    - name: Dearmour signal key
+      ansible.builtin.command: "gpg --dearmour {{ home_dir }}/Downloads/signal-keys.asc"
+      register: configtest_output
+      changed_when: configtest_output.rc == 0
+      tags: signal
+
+    - name: Copy signal key to system keyrings
+      ansible.builtin.copy:
+        src: "{{ home_dir }}/Downloads/signal-keys.asc.gpg"
+        dest: /usr/share/keyrings/signal-desktop-keyring.asc
+        mode: '0644'
       tags: signal
 
     - name: Add signal apt repo
