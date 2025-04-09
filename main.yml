@@ -787,6 +787,7 @@
         - "{{ home_dir }}/.local/share/fonts/truetype/nerd_symbols"
       tags:
         - fonts
+        - iosevka
 
     - name: Download iosevka fonts
       ansible.builtin.get_url:
@@ -798,6 +799,7 @@
         checksum: sha256:"{{ iosevka_fonts_sha256 }}"
       tags:
         - fonts
+        - iosevka
 
     - name: Extract iosevka.zip
       ansible.builtin.unarchive:
@@ -807,6 +809,7 @@
         group: domino
       tags:
         - fonts
+        - iosevka
 
     - name: Download nerd_symbols fonts
       ansible.builtin.get_url:
@@ -818,6 +821,7 @@
         checksum: sha256:"{{ nerd_symbols_sha256 }}"
       tags:
         - fonts
+        - nerd
 
     - name: Extract nerd_symbols.zip
       ansible.builtin.unarchive:
@@ -827,6 +831,7 @@
         group: domino
       tags:
         - fonts
+        - nerd
 
     - name: Install oh-my-zsh
       ansible.builtin.git:
