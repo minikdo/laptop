@@ -55,11 +55,19 @@
       tags:
         - grub
 
-    - name: Configure grub cmdline linux
+    - name: Clear GRUB_CMDLINE_LINUX_DEFAULT
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        regexp: '^GRUB_CMDLINE_LINUX_DEFAULT='
+        line: 'GRUB_CMDLINE_LINUX_DEFAULT=""'
+      tags:
+        - grub
+
+    - name: Set loglevel=1 in grub cmd line
       ansible.builtin.lineinfile:
         path: /etc/default/grub
         regexp: '^GRUB_CMDLINE_LINUX='
-        line: 'GRUB_CMDLINE_LINUX="loglevel=1 rd.systemd.show_status=auto rd.udev.log_priority=1"'
+        line: 'GRUB_CMDLINE_LINUX="loglevel=1"'
       tags:
         - grub
       notify: Run update-grub
