@@ -81,7 +81,6 @@
           - debian-keyring
           - signing-party
           - polkitd
-          # - systemd-resolved
           - systemd-timesyncd
       tags:
         - apt
@@ -749,7 +748,6 @@
       ansible.builtin.command: "gpg --dearmour {{ home_dir }}/Downloads/signal-keys.asc"
       register: configtest_output
       changed_when: configtest_output.rc == 0
-      tags: signal
 
     - name: Copy signal key to system keyrings
       ansible.builtin.copy:
