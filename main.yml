@@ -234,6 +234,7 @@
       ansible.builtin.apt:
         pkg:
           - emacs-gtk
+          - org-mode-doc
           - dh-elpa-helper
           - elpa-apache-mode
           - elpa-bind-key
