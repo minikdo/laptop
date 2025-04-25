@@ -661,7 +661,7 @@
         owner: domino
         group: domino
         mode: '0750'
-      tags: helper
+      tags: gpg_helper_script
 
     - name: Create EAP wpa example
       ansible.builtin.copy:
@@ -680,7 +680,7 @@
         owner: domino
         group: domino
         mode: '0750'
-      tags: helper
+      tags: wpa_supplicant
 
     - name: Configure wireguard network
       ansible.builtin.template:
