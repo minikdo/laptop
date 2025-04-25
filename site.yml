@@ -1,0 +1,20 @@
+---
+- name: Run common roles
+  hosts: localhost
+  become: true
+  become_method: ansible.builtin.sudo
+  gather_facts: true
+  gather_subset:
+    - "machine"
+    - "!all"
+    - "!env"
+    - "!min"
+  vars_files:
+    - vars/wireguard.yml
+    - vars/network.yml
+    - vars/urls.yml
+    - vars/syncthing.yml
+  vars:
+    home_dir: /home/domino
+  roles:
+    - common
