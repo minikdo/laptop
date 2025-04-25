@@ -1,0 +1,15 @@
+- name: Install packaging tools
+  ansible.builtin.apt:
+    pkg:
+      - dpkg-dev
+      - dput
+      - devscripts
+      - lintian
+      - quilt
+      - debian-policy
+      - git-buildpackage
+      - pristine-tar
+  tags:
+    - apt
+    - packaging
+    - extra

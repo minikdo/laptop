@@ -1,0 +1,58 @@
+- name: Create Downloads and fonts dirs
+  ansible.builtin.file:
+    path: "{{ item }}"
+    owner: domino
+    group: domino
+    state: directory
+    mode: '0755'
+  loop:
+    - "{{ home_dir }}/Downloads"
+    - "{{ home_dir }}/.local/share/fonts/truetype/iosevka"
+    - "{{ home_dir }}/.local/share/fonts/truetype/nerd_symbols"
+  tags:
+    - fonts
+    - iosevka
+
+- name: Download iosevka fonts
+  ansible.builtin.get_url:
+    url: "{{ iosevka_fonts_url }}"
+    dest: "{{ home_dir }}/Downloads/iosevka.zip"
+    mode: '0644'
+    owner: domino
+    group: domino
+    checksum: sha256:"{{ iosevka_fonts_sha256 }}"
+  tags:
+    - fonts
+    - iosevka
+
+- name: Extract iosevka.zip
+  ansible.builtin.unarchive:
+    src: "{{ home_dir }}/Downloads/iosevka.zip"
+    dest: "{{ home_dir }}/.local/share/fonts/truetype/iosevka"
+    owner: domino
+    group: domino
+  tags:
+    - fonts
+    - iosevka
+
+- name: Download nerd_symbols fonts
+  ansible.builtin.get_url:
+    url: "{{ nerd_symbols_url }}"
+    dest: "{{ home_dir }}/Downloads/nerd_symbols.zip"
+    mode: '0644'
+    owner: domino
+    group: domino
+    checksum: sha256:"{{ nerd_symbols_sha256 }}"
+  tags:
+    - fonts
+    - nerd
+
+- name: Extract nerd_symbols.zip
+  ansible.builtin.unarchive:
+    src: "{{ home_dir }}/Downloads/nerd_symbols.zip"
+    dest: "{{ home_dir }}/.local/share/fonts/truetype/nerd_symbols"
+    owner: domino
+    group: domino
+  tags:
+    - fonts
+    - nerd

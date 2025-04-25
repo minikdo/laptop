@@ -1,0 +1,38 @@
+- name: Install basic tools
+  ansible.builtin.apt:
+    pkg:
+      - etckeeper
+      - tuptime
+      - debian-keyring
+      - signing-party
+      - systemd-timesyncd
+  tags:
+    - apt
+    - basic
+
+- name: Remove avahi and rsyslog
+  ansible.builtin.apt:
+    pkg:
+      - avahi-daemon
+      - avahi-utils
+      - avahi-autoipd
+      - rsyslog
+      - bluetooth
+      - bluez
+      - isc-dhcp-client
+      - isc-dhcp-common
+      - ifupdown
+    state: absent
+  tags:
+    - apt
+
+- ansible.builtin.include_tasks: commandline.yml
+- ansible.builtin.include_tasks: networking.yml
+- ansible.builtin.include_tasks: emacs.yml
+- ansible.builtin.include_tasks: graphical.yml
+- ansible.builtin.include_tasks: fzf.yml
+- ansible.builtin.include_tasks: cups.yml
+- ansible.builtin.include_tasks: devel.yml
+- ansible.builtin.include_tasks: debian.yml
+- ansible.builtin.include_tasks: syncthing.yml
+- ansible.builtin.include_tasks: yubikey.yml

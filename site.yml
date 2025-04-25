@@ -10,11 +10,21 @@
     - "!env"
     - "!min"
   vars_files:
-    - vars/wireguard.yml
     - vars/network.yml
     - vars/urls.yml
-    - vars/syncthing.yml
   vars:
     home_dir: /home/domino
   roles:
-    - common
+    - { role: common, tags: common }
+    - { role: packages, tags: packages }
+    - { role: grub, tags: grub }
+    - { role: systemd, tags: systemd }
+    - { role: systemd-network, tags: systemd-network }
+    - { role: polkit, tags: polkit }
+    - { role: gpg, tags: gpg }
+    - { role: postfix, tags: postfix }
+    - { role: wireguard, tags: wireguard }
+    - { role: console-setup, tags: console-setup }
+    - { role: nftables, tags: nftables }
+    - { role: signal, tags: signal }
+    - { role: external_fonts, tags: external_fonts }

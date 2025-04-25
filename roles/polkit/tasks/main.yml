@@ -1,0 +1,11 @@
+- name: Install basic tools
+  ansible.builtin.apt:
+    name: polkitd
+
+- name: Copy polkit rules
+  ansible.builtin.copy:
+    src: files/50-local-allow.rules
+    dest: /etc/polkit-1/rules.d/50-local-allow.rules
+    owner: root
+    group: root
+    mode: '0644'

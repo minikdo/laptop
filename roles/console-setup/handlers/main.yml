@@ -2,8 +2,3 @@
   ansible.builtin.command: update-initramfs -u
   register: update_output
   changed_when: update_output.rc == 0
-
-- name: Run update-grub
-  ansible.builtin.command: update-grub
-  register: update_output
-  changed_when: update_output.rc == 0

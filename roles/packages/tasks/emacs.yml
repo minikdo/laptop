@@ -1,0 +1,65 @@
+- name: Install emacs and elpa pkgs
+  ansible.builtin.apt:
+    pkg:
+      - emacs-gtk
+      - org-mode-doc
+      - dh-elpa-helper
+      - elpa-apache-mode
+      - elpa-bind-key
+      - elpa-clues-theme
+      - elpa-company
+      - elpa-concurrent
+      - elpa-ctable
+      - elpa-dash
+      - elpa-deferred
+      - elpa-diminish
+      - elpa-dockerfile-mode
+      - elpa-epc
+      - elpa-f
+      - elpa-flx
+      - elpa-flx-ido
+      - elpa-git-annex
+      - elpa-haskell-mode
+      - elpa-ht
+      - elpa-htmlize
+      - elpa-jinja2-mode
+      - elpa-lsp-mode
+      - python3-pylsp  # for lsp-mode
+      - elpa-flycheck
+      - elpa-lv
+      - elpa-markdown-mode
+      - elpa-modus-themes
+      - elpa-nginx-mode
+      - elpa-org-bullets
+      - elpa-paredit
+      - elpa-popup
+      - elpa-projectile
+      - elpa-rainbow-mode
+      - elpa-redtick
+      - sox  # for redtick sounds
+      - elpa-s
+      - elpa-smex
+      - elpa-spinner
+      - elpa-use-package
+      - elpa-virtualenvwrapper
+      - elpa-web-mode
+      - elpa-which-key
+      - elpa-ws-butler
+      - elpa-yaml-mode
+      - elpa-yasnippet
+      - elpa-yasnippet-snippets
+  tags:
+    - apt
+    - emacs
+    - elpa
+
+- name: Install dictionaries
+  ansible.builtin.apt:
+    pkg:
+      - aspell
+      - aspell-en
+      - aspell-pl
+  tags:
+    - apt
+    - emacs
+    - dict

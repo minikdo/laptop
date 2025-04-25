@@ -1,0 +1,27 @@
+- name: Set journald retention
+  ansible.builtin.blockinfile:
+    path: /etc/systemd/journald.conf.d/retention.conf
+    block: |
+      [Journal]
+      MaxRetentionSec=1month
+    create: true
+    mode: "0644"
+
+- name: Set systemd-logind hibernation
+  ansible.builtin.blockinfile:
+    path: /etc/systemd/logind.conf.d/hibernate.conf
+    block: |
+      [Login]
+      HandleLidSwitch=suspend-then-hibernate
+      HandleSuspendKey=suspend-then-hibernate
+    create: true
+    mode: "0644"
+
+- name: Set hibernate delay
+  ansible.builtin.blockinfile:
+    path: /etc/systemd/sleep.conf.d/hibernate.conf
+    block: |
+      [Sleep]
+      HibernateDelaySec=300m
+    create: true
+    mode: "0644"

@@ -1,0 +1,29 @@
+- name: Install wireguard
+  ansible.builtin.apt:
+    pkg:
+      - wireguard
+  tags: wireguard
+
+- name: Configure wireguard network
+  ansible.builtin.template:
+    src: "roles/wireguard/templates/wg.network.j2"
+    dest: "/etc/systemd/network/{{ item }}.network"
+    mode: "0644"
+  loop:
+    - wg0
+    - wg4
+    - wg5
+    - wg6
+  tags: wireguard
+
+- name: Configure wireguard netdev
+  ansible.builtin.template:
+    src: "roles/wireguard/templates/wg.netdev.j2"
+    dest: "/etc/systemd/network/{{ item }}.netdev"
+    mode: "0644"
+  loop:
+    - wg0
+    - wg4
+    - wg5
+    - wg6
+  tags: wireguard

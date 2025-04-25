@@ -1,0 +1,49 @@
+- name: Configure wpa_supplicant
+  ansible.builtin.copy:
+    dest: "/etc/wpa_supplicant/wpa_supplicant-{{ iface[hostvars['localhost'].ansible_hostname] }}.conf"
+    content: |
+      ctrl_interface=DIR=/run/wpa_supplicant GROUP=adm
+      update_config=1
+      p2p_disabled=1
+      pmf=1
+    mode: "0640"
+  tags: wpasupplicant
+
+- name: Create EAP wpa example
+  ansible.builtin.copy:
+    dest: "{{ home_dir }}/wpa_supplicant_eap.conf"
+    content: |
+      network={
+          ssid="Connectionlost_5"
+          key_mgmt=WPA-EAP IEEE8021X
+          eap=TTLS
+          identity=""
+          password=""
+          ca_cert="/etc/wpa_supplicant/certs/dominowisla.pem"
+          phase2="auth=MSCHAPV2"
+          mesh_fwding=1
+      }
+    owner: domino
+    group: domino
+    mode: '0750'
+  tags: wpasupplicant
+
+- name: Configure wlan network
+  ansible.builtin.template:
+    src: "roles/systemd-network/templates/wlan.network.j2"
+    dest: "/etc/systemd/network/{{ iface[hostvars['localhost'].ansible_hostname] }}.network"
+    mode: "0644"
+  tags: systemd-network
+
+- name: Enable now systemd-networkd
+  ansible.builtin.systemd:
+    state: started
+    enabled: true
+    name: systemd-networkd
+  tags: systemd-network
+
+- name: Disable networking.service
+  ansible.builtin.systemd:
+    enabled: false
+    name: networking
+  tags: systemd-network

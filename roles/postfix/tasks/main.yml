@@ -1,0 +1,31 @@
+- name: Install postfix
+  ansible.builtin.apt:
+    pkg:
+      - postfix
+      - libsasl2-2
+      - libsasl2-modules
+  tags:
+    - apt
+    - postfix
+
+- name: Configure postfix
+  ansible.builtin.copy:
+    dest: /etc/postfix/main.cf
+    content: |
+      # MANAGED BY ANSIBLE
+      myorigin = minik.pl
+      smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+      smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+      smtpd_use_tls=yes
+      smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+      smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+      relayhost = poczta.minik.pl:587
+      inet_interfaces = 127.0.0.1
+      smtp_use_tls = yes
+      smtp_sasl_auth_enable = yes
+      smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+      smtp_sasl_security_options =
+      smtpd_relay_restrictions = reject_unauth_destination
+      message_size_limit = 20000000
+    mode: "0644"
+  tags: postfix

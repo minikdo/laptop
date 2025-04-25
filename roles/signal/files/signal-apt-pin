@@ -1,0 +1,11 @@
+# Ansible Managed.
+
+Explanation: signal-desktop-beta: signal-desktop-beta
+Package: signal-desktop-beta
+Pin: origin "updates.signal.org"
+Pin-Priority: 1000
+
+Explanation: signal-desktop-beta: signal-desktop-beta-negative
+Package: *
+Pin: origin "updates.signal.org"
+Pin-Priority: 200

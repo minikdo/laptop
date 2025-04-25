@@ -1,0 +1,9 @@
+- name: Install yubikey tools
+  ansible.builtin.apt:
+    pkg:
+      - yubikey-manager
+      - libpam-yubico
+  tags:
+    - apt
+    - yubico
+    - extra

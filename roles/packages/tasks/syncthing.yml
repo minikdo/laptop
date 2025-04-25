@@ -1,0 +1,8 @@
+- name: Install syncthing
+  ansible.builtin.apt:
+    pkg:
+      - syncthing
+  tags:
+    - apt
+    - syncthing
+    - extra

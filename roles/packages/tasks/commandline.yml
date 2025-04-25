@@ -1,0 +1,77 @@
+- name: Install shell, terminals and multiplexers
+  ansible.builtin.apt:
+    pkg:
+      - zsh
+      - kitty
+      - rxvt-unicode
+      - tmux
+      - screen
+      - bash-completion
+  tags:
+    - apt
+    - shell
+
+- name: Install command-line tools
+  ansible.builtin.apt:
+    pkg:
+      - ack
+      - apt-file
+      - apt-listchanges
+      - autossh
+      - direnv
+      - dosfstools
+      - enca
+      - gdu
+      - htop
+      - jq
+      - lsof
+      - mailcap
+      - man-db
+      - mc
+      - metar
+      - ncal
+      - needrestart
+      - pass
+      - pdftk-java
+      - pmount
+      - postgresql-client
+      - psmisc
+      - px
+      - ripgrep
+      - secure-delete
+      - sm
+      - sqlite3
+      - tlp
+      - tzwatch
+      - unzip
+      - zip
+  tags:
+    - apt
+    - commandline
+
+- name: Install version control tools
+  ansible.builtin.apt:
+    pkg:
+      - git
+      - vcsh
+      - myrepos
+  tags:
+    - apt
+    - vc
+
+- name: Install mail and chat utils
+  ansible.builtin.apt:
+    pkg:
+      - abook
+      - neomutt
+      - mutt
+      - isync
+      - notmuch
+      - notmuch-mutt
+      - profanity
+      - bsd-mailx
+      - mblaze
+      - w3m
+  tags:
+    - apt
+    - mail

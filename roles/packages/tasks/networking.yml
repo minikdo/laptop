@@ -1,0 +1,18 @@
+- name: Install networking tools
+  ansible.builtin.apt:
+    pkg:
+      - aircrack-ng
+      - bind9-dnsutils
+      - ethtool
+      - httpie
+      - iperf3
+      - netcat-openbsd
+      - nmap
+      - socat
+      - speedtest-cli
+      - tcpdump
+      - wireshark
+  tags:
+    - apt
+    - networking
+    - extra

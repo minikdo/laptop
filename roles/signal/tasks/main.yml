@@ -1,0 +1,29 @@
+- name: Add signal apt key
+  ansible.builtin.copy:
+    src: signal-desktop-keyring.gpg
+    dest: /usr/share/keyrings/signal-desktop-keyring.gpg
+    mode: '0644'
+    owner: root
+    group: root
+  tags: signal
+
+- name: Add signal apt repo
+  ansible.builtin.apt_repository:
+    repo: >
+      deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg]
+      https://updates.signal.org/desktop/apt xenial main
+  tags: signal
+
+- name: Pin signal packages
+  ansible.builtin.copy:
+    src: signal-apt-pin
+    dest: /etc/apt/preferences.d/signal-apt-pin
+    mode: '0644'
+    owner: root
+    group: root
+  tags: signal
+
+- name: Install signal and dependencies
+  ansible.builtin.apt:
+    name: signal-desktop-beta
+  tags: signal

@@ -1,0 +1,147 @@
+- name: Install xorg
+  ansible.builtin.apt:
+    pkg:
+      - xserver-xorg
+      - xserver-xorg-core
+      - xserver-xorg-input-all
+      - xserver-xorg-input-libinput
+      - xserver-xorg-input-synaptics
+      - xserver-xorg-input-wacom
+      - xserver-xorg-legacy
+      - xserver-xorg-video-intel
+      - x11-xserver-utils
+      - x11-utils
+      - x11-common
+      - xauth
+      - xinit
+      - xclip
+      - slim
+      - picom
+      - xbacklight
+      - wmctrl
+      - feh
+  tags:
+    - apt
+    - xorg
+    - xmonad
+
+- name: Install xmonad and utils
+  ansible.builtin.apt:
+    pkg:
+      - libghc-xmonad-contrib-dev
+      - libghc-xmonad-contrib-doc
+      - libghc-xmonad-dev
+      - libghc-xmonad-doc
+      - libghc-xmonad-extras-dev
+      - libghc-xmonad-wallpaper-dev
+      - xmonad
+      - xmobar
+      - suckless-tools
+      - xss-lock
+      - xtrlock
+      - redshift
+      - concalc
+      - dunst
+      - unclutter
+      - parcellite
+      - autorandr
+      - breeze-cursor-theme
+      - lxappearance
+      - pcmanfm
+      - vainfo
+      - libnotify-bin
+  tags:
+    - apt
+    - xmonad
+
+- name: Install X11 utils
+  ansible.builtin.apt:
+    pkg:
+      - tigervnc-viewer
+      - simple-scan
+      - sane-utils
+      - evolution-data-server
+      - gnome-calendar
+      - desktop-file-utils
+      - sqlitebrowser
+  tags:
+    - apt
+    - vnc
+    - extra
+
+- name: Install fonts
+  ansible.builtin.apt:
+    pkg:
+      - fonts-takao
+      - fonts-indic
+      - fonts-noto-color-emoji
+  tags:
+    - apt
+    - fonts
+    - extra
+
+- name: Install texlive
+  ansible.builtin.apt:
+    pkg:
+      - texlive-latex-extra
+      - texlive-latex-recommended
+      - texlive-extra-utils
+      - texlive-xetex
+      - texlive-fonts-extra
+      - texlive-fonts-recommended
+      - texlive-plain-generic
+  tags:
+    - apt
+    - texlive
+    - extra
+
+
+- name: Install media utils
+  ansible.builtin.apt:
+    pkg:
+      - viewnior
+      - evince
+      - gimp
+      - gimp-gmic
+      - gimagereader
+      - tesseract-ocr-pol
+      - librsvg2-common  # gimp icons
+      - imagemagick
+      - fgallery
+      - mpv
+      - ffmpeg
+      - mkvtoolnix-gui
+      - mat2
+      - scrot
+      - zbar-tools
+      - qrencode
+      - genisoimage
+      - wodim
+  tags:
+    - apt
+    - media
+    - extra
+
+- name: Install pulseaudio
+  ansible.builtin.apt:
+    pkg:
+      - pulseaudio
+      - pulseaudio-utils
+      - pavucontrol
+  tags:
+    - apt
+    - pulseaudio
+
+- name: Install web browsers
+  ansible.builtin.apt:
+    pkg:
+      - firefox-esr
+      # - chromium
+      - webext-browserpass
+      - webext-foxyproxy
+      - webext-ublock-origin-chromium
+      - webext-ublock-origin-firefox
+      - yt-dlp
+  tags:
+    - apt
+    - browser

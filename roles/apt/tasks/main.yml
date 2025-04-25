@@ -1,0 +1,24 @@
+- name: Congfigure apt periodic
+  ansible.builtin.blockinfile:
+    path: /etc/apt/apt.conf.d/10periodic
+    block: |
+      APT::Periodic::Enable "1";
+      APT::Periodic::MaxAge "30d";
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Verbose "1";
+      APT::Periodic::Download-Upgradeable-Packages "1";
+      APT::Periodic::Unattended-Upgrade "0";
+      APT::Periodic::AutocleanInterval "10";
+    create: true
+    mode: "0644"
+  tags: aptconf
+
+- name: Configure apt norecommends
+  ansible.builtin.blockinfile:
+    path: /etc/apt/apt.conf.d/01norecommend
+    block: |
+      APT::Install-Recommends "0";
+      APT::Install-Suggests "0";
+    create: true
+    mode: "0644"
+  tags: aptconf

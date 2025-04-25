@@ -1,0 +1,53 @@
+- name: Install gpg
+  ansible.builtin.apt:
+    pkg:
+      - gpg
+      - gpg-agent
+      - pinentry-gtk2
+      - scdaemon
+      - pcscd
+
+- name: Create gnupg dir
+  ansible.builtin.file:
+    path: "{{ home_dir }}/.gnupg"
+    state: directory
+    owner: domino
+    group: domino
+    mode: '0700'
+
+- name: Setup temporary gpg-agent
+  ansible.builtin.blockinfile:
+    path: "{{ home_dir }}/.gnupg/gpg-agent.conf"
+    block: |
+      default-cache-ttl 14400
+      max-cache-ttl 14401
+      enable-ssh-support
+      keep-display
+      pinentry-program /usr/bin/pinentry-curses
+    create: true
+    owner: domino
+    group: domino
+    mode: "0600"
+
+- name: Setup temporary scdaemon.conf
+  ansible.builtin.blockinfile:
+    path: "{{ home_dir }}/.gnupg/scdaemon.conf"
+    block: |
+      pcsc-driver /usr/lib/x86_64-linux-gnu/libpcsclite.so.1
+      card-timeout 5
+      disable-ccid
+    create: true
+    owner: domino
+    group: domino
+    mode: "0600"
+
+- name: Copy gpg ssh-auth-sock helper script
+  ansible.builtin.copy:
+    dest: "{{ home_dir }}/ssh-auth-sock.sh"
+    content: |
+      export GPG_TTY=\"$(tty)\"
+      export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+      gpg-connect-agent updatestartuptty /bye
+    owner: domino
+    group: domino
+    mode: '0750'
