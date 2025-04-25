@@ -1,0 +1,14 @@
+- name: Install tuptime
+  ansible.builtin.apt:
+    name: tuptime
+    state: present
+
+- name: Update tuptime timer
+  ansible.builtin.blockinfile:
+    path: /etc/systemd/system/tuptime-sync.timer.d/override.conf
+    block: |
+      [Timer]
+      OnCalendar=
+      OnCalendar=hourly
+    create: true
+    mode: "0644"

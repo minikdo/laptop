@@ -15,12 +15,12 @@
 
 - name: Download iosevka fonts
   ansible.builtin.get_url:
-    url: "{{ iosevka_fonts_url }}"
+    url: "{{ external_fonts_iosevka_url }}"
     dest: "{{ home_dir }}/Downloads/iosevka.zip"
     mode: '0644'
     owner: domino
     group: domino
-    checksum: sha256:"{{ iosevka_fonts_sha256 }}"
+    checksum: sha256:"{{ external_fonts_iosevka_sha256 }}"
   tags:
     - fonts
     - iosevka
@@ -37,12 +37,12 @@
 
 - name: Download nerd_symbols fonts
   ansible.builtin.get_url:
-    url: "{{ nerd_symbols_url }}"
+    url: "{{ external_fonts_nerdsymbols_url }}"
     dest: "{{ home_dir }}/Downloads/nerd_symbols.zip"
     mode: '0644'
     owner: domino
     group: domino
-    checksum: sha256:"{{ nerd_symbols_sha256 }}"
+    checksum: sha256:"{{ external_fonts_nerdsymbols_sha256 }}"
   tags:
     - fonts
     - nerd

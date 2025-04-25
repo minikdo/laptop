@@ -1,4 +1,4 @@
-iosevka_fonts_url: https://github.com/be5invis/Iosevka/releases/download/v33.2.0/PkgTTC-Iosevka-33.2.0.zip
-iosevka_fonts_sha256: 6dd5eb285271a26d68103d353e7cf2f7a066dc6c6674399dcd476ffe1037e2ba
-nerd_symbols_url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/NerdFontsSymbolsOnly.zip
-nerd_symbols_sha256: 2078603c1e7a2fc2fa9e625ba1c30264d5d7c39907813d89beaa373f73a3a340
+external_fonts_iosevka_url: https://github.com/be5invis/Iosevka/releases/download/v33.2.0/PkgTTC-Iosevka-33.2.0.zip
+external_fonts_iosevka_sha256: 6dd5eb285271a26d68103d353e7cf2f7a066dc6c6674399dcd476ffe1037e2ba
+external_fonts_nerdsymbols_url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/NerdFontsSymbolsOnly.zip
+external_fonts_nerdsymbols_sha256: 2078603c1e7a2fc2fa9e625ba1c30264d5d7c39907813d89beaa373f73a3a340

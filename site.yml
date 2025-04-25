@@ -27,4 +27,5 @@
     - { role: console-setup, tags: console-setup }
     - { role: nftables, tags: nftables }
     - { role: signal, tags: signal }
+    - { role: crontab, tags: crontab }
     - { role: external_fonts, tags: external_fonts }

@@ -26,17 +26,6 @@
     line: 'XKBOPTIONS="ctrl:nocaps"'
   tags: nocaps
 
-- name: Update tuptime timer
-  ansible.builtin.blockinfile:
-    path: /etc/systemd/system/tuptime-sync.timer.d/override.conf
-    block: |
-      [Timer]
-      OnCalendar=
-      OnCalendar=hourly
-    create: true
-    mode: "0644"
-  tags: tuptime
-
 - name: Add udev rules for ybacklight
   ansible.builtin.blockinfile:
     path: /etc/udev/rules.d/90-ybacklight.rules
@@ -61,39 +50,3 @@
     group: root
     mode: "0644"
   tags: viia
-
-- name: Create MAILTO env
-  ansible.builtin.cron:
-    name: MAILTO
-    env: true
-    job: "do@minik.pl"
-    user: domino
-  tags:
-    - cron
-
-- name: Create MAILTO env
-  ansible.builtin.cron:
-    name: BACKUPDIR
-    env: true
-    job: "{{ home_dir }}/syncthing/backup"
-    user: domino
-  tags:
-    - cron
-
-- name: Create a crontab to backup tuptime db
-  ansible.builtin.cron:
-    name: "tuptime db backup task"
-    special_time: "reboot"
-    job: "cp /var/lib/tuptime/tuptime.db $BACKUPDIR/$(hostname)_tuptime_$(date +%s).db"
-    user: domino
-  tags:
-    - cron
-
-- name: Create a crontab to /etc/hosts
-  ansible.builtin.cron:
-    name: "hosts backup task"
-    special_time: "reboot"
-    job: "cp /etc/hosts $BACKUPDIR/$(hostname)_hosts_$(date +%s)"
-    user: domino
-  tags:
-    - cron

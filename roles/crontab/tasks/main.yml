@@ -1,0 +1,35 @@
+- name: Create MAILTO env
+  ansible.builtin.cron:
+    name: MAILTO
+    env: true
+    job: "{{ crontab_email }}"
+    user: domino
+  tags:
+    - cron
+
+- name: Create MAILTO env
+  ansible.builtin.cron:
+    name: BACKUPDIR
+    env: true
+    job: "{{ home_dir }}/syncthing/backup"
+    user: domino
+  tags:
+    - cron
+
+- name: Create a crontab to backup tuptime db
+  ansible.builtin.cron:
+    name: "tuptime db backup task"
+    special_time: "reboot"
+    job: "cp /var/lib/tuptime/tuptime.db $BACKUPDIR/$(hostname)_tuptime_$(date +%s).db"
+    user: domino
+  tags:
+    - cron
+
+- name: Create a crontab to /etc/hosts
+  ansible.builtin.cron:
+    name: "hosts backup task"
+    special_time: "reboot"
+    job: "cp /etc/hosts $BACKUPDIR/$(hostname)_hosts_$(date +%s)"
+    user: domino
+  tags:
+    - cron

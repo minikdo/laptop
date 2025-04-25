@@ -2,7 +2,6 @@
   ansible.builtin.apt:
     pkg:
       - etckeeper
-      - tuptime
       - debian-keyring
       - signing-party
       - systemd-timesyncd
@@ -26,13 +25,35 @@
   tags:
     - apt
 
-- ansible.builtin.include_tasks: commandline.yml
-- ansible.builtin.include_tasks: networking.yml
-- ansible.builtin.include_tasks: emacs.yml
-- ansible.builtin.include_tasks: graphical.yml
-- ansible.builtin.include_tasks: fzf.yml
-- ansible.builtin.include_tasks: cups.yml
-- ansible.builtin.include_tasks: devel.yml
-- ansible.builtin.include_tasks: debian.yml
-- ansible.builtin.include_tasks: syncthing.yml
-- ansible.builtin.include_tasks: yubikey.yml
+- name: Install commandline packages
+  ansible.builtin.include_tasks: commandline.yml
+
+- name: Install networking packages
+  ansible.builtin.include_tasks: networking.yml
+
+- name: Install emacs and elpa packages
+  ansible.builtin.include_tasks: emacs.yml
+
+- name: Install and configure tuptime
+  ansible.builtin.include_tasks: tuptime.yml
+
+- name: Install graphical packages
+  ansible.builtin.include_tasks: graphical.yml
+
+- name: Install and configure fzf package
+  ansible.builtin.include_tasks: fzf.yml
+
+- name: Install cups packages
+  ansible.builtin.include_tasks: cups.yml
+
+- name: Install devel packages
+  ansible.builtin.include_tasks: devel.yml
+
+- name: Install debian packages
+  ansible.builtin.include_tasks: debian.yml
+
+- name: Install syncthing packages
+  ansible.builtin.include_tasks: syncthing.yml
+
+- name: Install yubikey packages
+  ansible.builtin.include_tasks: yubikey.yml
