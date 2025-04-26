@@ -9,7 +9,4 @@
       - debian-policy
       - git-buildpackage
       - pristine-tar
-  tags:
-    - apt
-    - packaging
-    - extra
+    state: present

@@ -15,6 +15,7 @@
   vars:
     home_dir: /home/domino
   roles:
+    - { role: apt, tags: apt }
     - { role: common, tags: common }
     - { role: packages, tags: packages }
     - { role: grub, tags: grub }

@@ -5,9 +5,6 @@
       - debian-keyring
       - signing-party
       - systemd-timesyncd
-  tags:
-    - apt
-    - basic
 
 - name: Remove avahi and rsyslog
   ansible.builtin.apt:
@@ -22,8 +19,6 @@
       - isc-dhcp-common
       - ifupdown
     state: absent
-  tags:
-    - apt
 
 - name: Install commandline packages
   ansible.builtin.include_tasks: commandline.yml

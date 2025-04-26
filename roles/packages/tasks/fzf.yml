@@ -1,10 +1,7 @@
 - name: Install fzf
   ansible.builtin.apt:
-    pkg:
-      - fzf
-  tags:
-    - apt
-    - fzf
+    name: fzf
+    state: present
 
 - name: Copy fzf key-bindings.zsh
   ansible.builtin.copy:
@@ -13,4 +10,3 @@
     owner: domino
     group: domino
     mode: '0644'
-  tags: fzf

@@ -4,10 +4,7 @@
       - strace
       - ltrace
       - binwalk
-  tags:
-    - apt
-    - debug
-    - extra
+    state: present
 
 - name: Install virtualization tools
   ansible.builtin.apt:
@@ -15,10 +12,7 @@
       - systemd-container
       - debootstrap
       - docker-cli
-  tags:
-    - apt
-    - virt
-    - extra
+    state: present
 
 - name: Install python
   ansible.builtin.apt:
@@ -37,7 +31,4 @@
       - pylint
       - virtualenvwrapper
       - cloc
-  tags:
-    - apt
-    - python
-    - extra
+    state: present

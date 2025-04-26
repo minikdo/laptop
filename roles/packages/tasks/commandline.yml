@@ -7,9 +7,7 @@
       - tmux
       - screen
       - bash-completion
-  tags:
-    - apt
-    - shell
+  state: present
 
 - name: Install command-line tools
   ansible.builtin.apt:
@@ -45,9 +43,7 @@
       - tzwatch
       - unzip
       - zip
-  tags:
-    - apt
-    - commandline
+  state: present
 
 - name: Install version control tools
   ansible.builtin.apt:
@@ -55,9 +51,7 @@
       - git
       - vcsh
       - myrepos
-  tags:
-    - apt
-    - vc
+  state: present
 
 - name: Install mail and chat utils
   ansible.builtin.apt:
@@ -72,6 +66,4 @@
       - bsd-mailx
       - mblaze
       - w3m
-  tags:
-    - apt
-    - mail
+  state: present

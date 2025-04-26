@@ -3,7 +3,4 @@
     pkg:
       - yubikey-manager
       - libpam-yubico
-  tags:
-    - apt
-    - yubico
-    - extra
+    state: present

@@ -5,19 +5,7 @@
       - cups-client
       - cups-bsd
       - printer-driver-foo2zjs
-  tags:
-    - apt
-    - cups
-    - extra
-
-- name: Disable now cups
-  ansible.builtin.systemd:
-    state: stopped
-    enabled: false
-    name: cups
-  tags:
-    - cups
-    - extra
+    state: present
 
 - name: Add the user domino to lp groups
   ansible.builtin.user:
@@ -25,6 +13,9 @@
     shell: /bin/zsh
     groups: lp,lpadmin
     append: true
-  tags:
-    - cups
-    - extra
+    
+- name: Stop and disable cups.service
+  ansible.builtin.systemd:
+    state: stopped
+    enabled: false
+    name: cups

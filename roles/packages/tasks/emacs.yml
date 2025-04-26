@@ -48,10 +48,7 @@
       - elpa-yaml-mode
       - elpa-yasnippet
       - elpa-yasnippet-snippets
-  tags:
-    - apt
-    - emacs
-    - elpa
+    state: present
 
 - name: Install dictionaries
   ansible.builtin.apt:
@@ -59,7 +56,4 @@
       - aspell
       - aspell-en
       - aspell-pl
-  tags:
-    - apt
-    - emacs
-    - dict
+    state: present

@@ -12,7 +12,4 @@
       - speedtest-cli
       - tcpdump
       - wireshark
-  tags:
-    - apt
-    - networking
-    - extra
+    state: present

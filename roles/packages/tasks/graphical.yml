@@ -20,10 +20,7 @@
       - xbacklight
       - wmctrl
       - feh
-  tags:
-    - apt
-    - xorg
-    - xmonad
+  state: present
 
 - name: Install xmonad and utils
   ansible.builtin.apt:
@@ -50,9 +47,7 @@
       - pcmanfm
       - vainfo
       - libnotify-bin
-  tags:
-    - apt
-    - xmonad
+  state: present
 
 - name: Install X11 utils
   ansible.builtin.apt:
@@ -64,10 +59,7 @@
       - gnome-calendar
       - desktop-file-utils
       - sqlitebrowser
-  tags:
-    - apt
-    - vnc
-    - extra
+  state: present
 
 - name: Install fonts
   ansible.builtin.apt:
@@ -75,10 +67,7 @@
       - fonts-takao
       - fonts-indic
       - fonts-noto-color-emoji
-  tags:
-    - apt
-    - fonts
-    - extra
+  state: present
 
 - name: Install texlive
   ansible.builtin.apt:
@@ -90,11 +79,7 @@
       - texlive-fonts-extra
       - texlive-fonts-recommended
       - texlive-plain-generic
-  tags:
-    - apt
-    - texlive
-    - extra
-
+  state: present
 
 - name: Install media utils
   ansible.builtin.apt:
@@ -117,10 +102,7 @@
       - qrencode
       - genisoimage
       - wodim
-  tags:
-    - apt
-    - media
-    - extra
+  state: present
 
 - name: Install pulseaudio
   ansible.builtin.apt:
@@ -128,20 +110,16 @@
       - pulseaudio
       - pulseaudio-utils
       - pavucontrol
-  tags:
-    - apt
-    - pulseaudio
+  state: present
 
 - name: Install web browsers
   ansible.builtin.apt:
     pkg:
       - firefox-esr
-      # - chromium
+      - chromium
       - webext-browserpass
       - webext-foxyproxy
       - webext-ublock-origin-chromium
       - webext-ublock-origin-firefox
       - yt-dlp
-  tags:
-    - apt
-    - browser
+  state: present

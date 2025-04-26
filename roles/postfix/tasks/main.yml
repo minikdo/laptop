@@ -4,9 +4,6 @@
       - postfix
       - libsasl2-2
       - libsasl2-modules
-  tags:
-    - apt
-    - postfix
 
 - name: Configure postfix
   ansible.builtin.copy:
@@ -28,4 +25,4 @@
       smtpd_relay_restrictions = reject_unauth_destination
       message_size_limit = 20000000
     mode: "0644"
-  tags: postfix
+  tags: postfix_configure
