@@ -10,21 +10,22 @@
     - "!env"
     - "!min"
   vars:
-    home_dir: /home/domino
+    username: domino
+    home_dir: "/home/{{ username }}"
   roles:
     - { role: apt, tags: apt }
-    - { role: common, tags: common }
-    - { role: packages, tags: packages }
-    - { role: zsh, tags: zsh }
     - { role: grub, tags: grub }
+    - { role: keyboard, tags: keyboard }
+    - { role: packages, tags: packages }
     - { role: systemd, tags: systemd }
     - { role: systemd-network, tags: systemd-network }
     - { role: polkit, tags: polkit }
+    - { role: zsh, tags: zsh }
+    - { role: console-setup, tags: console-setup }
     - { role: gpg, tags: gpg }
     - { role: postfix, tags: postfix }
-    - { role: wireguard, tags: wireguard }
-    - { role: console-setup, tags: console-setup }
-    - { role: nftables, tags: nftables }
     - { role: signal, tags: signal }
-    - { role: crontab, tags: crontab }
     - { role: external_fonts, tags: external_fonts }
+    - { role: crontab, tags: crontab }
+    - { role: wireguard, tags: wireguard }
+    - { role: nftables, tags: nftables }
