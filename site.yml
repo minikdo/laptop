@@ -9,9 +9,6 @@
     - "!all"
     - "!env"
     - "!min"
-  vars_files:
-    - vars/network.yml
-    - vars/urls.yml
   vars:
     home_dir: /home/domino
   roles:

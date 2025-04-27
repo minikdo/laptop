@@ -13,7 +13,7 @@
     shell: /bin/zsh
     groups: lp,lpadmin
     append: true
-    
+
 - name: Stop and disable cups.service
   ansible.builtin.systemd:
     state: stopped
