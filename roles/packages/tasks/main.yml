@@ -22,33 +22,44 @@
 
 - name: Install commandline packages
   ansible.builtin.include_tasks: commandline.yml
+  tags: commandline
 
 - name: Install networking packages
   ansible.builtin.include_tasks: networking.yml
+  tags: networking
 
 - name: Install emacs and elpa packages
   ansible.builtin.include_tasks: emacs.yml
+  tags: emacs
 
 - name: Install and configure tuptime
   ansible.builtin.include_tasks: tuptime.yml
+  tags: tuptime
 
 - name: Install graphical packages
   ansible.builtin.include_tasks: graphical.yml
+  tags: graphical
 
 - name: Install and configure fzf package
   ansible.builtin.include_tasks: fzf.yml
+  tags: fzf
 
 - name: Install cups packages
   ansible.builtin.include_tasks: cups.yml
+  tags: cups
 
 - name: Install devel packages
   ansible.builtin.include_tasks: devel.yml
+  tags: devel
 
 - name: Install debian packages
   ansible.builtin.include_tasks: debian.yml
+  tags: debian
 
 - name: Install syncthing packages
   ansible.builtin.include_tasks: syncthing.yml
+  tags: syncthing
 
 - name: Install yubikey packages
   ansible.builtin.include_tasks: yubikey.yml
+  tags: yubikey
