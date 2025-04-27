@@ -44,6 +44,10 @@
   ansible.builtin.include_tasks: fzf.yml
   tags: fzf
 
+- name: Install and configure tlp package
+  ansible.builtin.include_tasks: tlp.yml
+  tags: tlp
+
 - name: Install cups packages
   ansible.builtin.include_tasks: cups.yml
   tags: cups

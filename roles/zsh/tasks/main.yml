@@ -1,0 +1,19 @@
+- name: Install zsh
+  ansible.builtin.apt:
+    name: zsh
+    state: present
+
+- name: Add the user domino to groups
+  ansible.builtin.user:
+    name: domino
+    shell: /bin/zsh
+    groups: sudo,adm,systemd-journal
+    append: true
+
+- name: Clone ohmyzsh repo
+  ansible.builtin.git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: "{{ home_dir }}/.oh-my-zsh"
+    version: master
+  become: true
+  become_user: domino

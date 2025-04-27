@@ -1,0 +1,18 @@
+- name: Set keyboard default
+  ansible.builtin.lineinfile:
+    path: /etc/default/keyboard
+    regexp: '^XKBOPTIONS='
+    line: 'XKBOPTIONS="ctrl:nocaps"'
+  tags: nocaps
+
+- name: Add udev rules for ybacklight
+  ansible.builtin.blockinfile:
+    path: /etc/udev/rules.d/90-ybacklight.rules
+    block: |
+      ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness"
+      ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"
+    create: true
+    owner: root
+    group: root
+    mode: "0644"
+  tags: ybacklight

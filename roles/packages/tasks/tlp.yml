@@ -1,0 +1,16 @@
+- name: Install tlp
+  ansible.builtin.apt:
+    name: tlp
+    state: present
+
+- name: Add usb denylist for rainy keyboard
+  ansible.builtin.blockinfile:
+    path: /etc/tlp.d/01-usb_denylist.conf
+    block: |
+      # Bus 001 Device 002: ID 320f:5055 RDR Rainy 75
+      # Bus 001 Device 003: ID 04d9:fc02 Holtek Semiconductor, Inc. USB Laser Game Mouse
+      USB_DENYLIST="320f:5055 04d9:fc02"
+    create: true
+    owner: root
+    group: root
+    mode: "0644"

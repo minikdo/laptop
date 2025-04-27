@@ -15,6 +15,7 @@
     - { role: apt, tags: apt }
     - { role: common, tags: common }
     - { role: packages, tags: packages }
+    - { role: zsh, tags: zsh }
     - { role: grub, tags: grub }
     - { role: systemd, tags: systemd }
     - { role: systemd-network, tags: systemd-network }
