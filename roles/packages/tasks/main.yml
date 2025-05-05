@@ -2,6 +2,7 @@
   ansible.builtin.apt:
     pkg:
       - etckeeper
+      - linux-sysctl-defaults
       - debian-keyring
       - signing-party
       - systemd-timesyncd
