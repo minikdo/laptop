@@ -31,6 +31,8 @@
       - needrestart
       - pass
       - pdftk-java
+      - qpdf
+      - qpdf-doc
       - pmount
       - postgresql-client
       - psmisc
