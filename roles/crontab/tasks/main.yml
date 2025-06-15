@@ -33,3 +33,12 @@
     user: domino
   tags:
     - cron
+
+- name: Create a crontab to backup battery capacity
+  ansible.builtin.cron:
+    name: "battery capacity backup task"
+    special_time: "reboot"
+    job: 'acpi -V | grep capacity | sed "s/^/|`date +%Y-%m-%d`|/" >> $BACKUPDIR/$(hostname)_battery.txt'
+    user: domino
+  tags:
+    - cron
