@@ -7,7 +7,7 @@
   tags:
     - cron
 
-- name: Create MAILTO env
+- name: Create BACKUPDIR env
   ansible.builtin.cron:
     name: BACKUPDIR
     env: true
