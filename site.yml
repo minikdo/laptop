@@ -29,3 +29,4 @@
     - { role: crontab, tags: crontab }
     - { role: wireguard, tags: wireguard }
     - { role: nftables, tags: nftables }
+    - { role: dnsmasq, tags: dnsmasq }
