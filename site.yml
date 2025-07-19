@@ -12,6 +12,7 @@
   vars:
     username: domino
     home_dir: "/home/{{ username }}"
+    pg_cluster_ver: 17
   roles:
     - { role: apt, tags: apt }
     - { role: grub, tags: grub }
@@ -29,4 +30,5 @@
     - { role: crontab, tags: crontab }
     - { role: wireguard, tags: wireguard }
     - { role: nftables, tags: nftables }
+    - { role: postgresql, tags: postgresql }
     - { role: dnsmasq, tags: dnsmasq }
