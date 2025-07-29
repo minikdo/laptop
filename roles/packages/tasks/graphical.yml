@@ -87,7 +87,7 @@
       - viewnior
       - evince
       - gimp
-      - gimp-gmic
+      - gthumb
       - gimagereader
       - tesseract-ocr-pol
       - librsvg2-common  # gimp icons
