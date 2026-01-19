@@ -4,26 +4,19 @@
       - wireguard
   tags: wireguard
 
-- name: Configure wireguard network
+- name: Template wireguard config
   ansible.builtin.template:
-    src: "roles/wireguard/templates/wg.network.j2"
-    dest: "/etc/systemd/network/{{ item }}.network"
-    mode: "0644"
-  loop:
-    - wg0
-    - wg4
-    - wg5
-    - wg6
-  tags: wireguard
+    src: interface.conf.j2
+    dest: "/etc/wireguard/{{ item.key }}.conf"
+    mode: '0600'
+    owner: root
+    group: root
+  loop: "{{ lookup('dict', wireguard, wantlist=True) }}"
+  tags: test
 
-- name: Configure wireguard netdev
-  ansible.builtin.template:
-    src: "roles/wireguard/templates/wg.netdev.j2"
-    dest: "/etc/systemd/network/{{ item }}.netdev"
-    mode: "0644"
-  loop:
-    - wg0
-    - wg4
-    - wg5
-    - wg6
-  tags: wireguard
+# TODO: move to a handler?
+- name: Systemd reload wg-quick
+  ansible.builtin.systemd_service:
+    state: reloaded
+    name: "wg-quick@{{ item.key }}"
+  loop: "{{ lookup('dict', wireguard, wantlist=True) }}"

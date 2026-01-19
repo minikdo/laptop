@@ -1,0 +1,19 @@
+[Interface]
+PrivateKey = {{ wireguard_priv }}
+Address = {{ item.value.address }}
+ListenPort = {{ item.value.listen_port }}
+{% if item.value.mtu %}
+MTU = {{ item.value.mtu }}
+{% endif %}
+Table = off
+
+{% for peer, data in item.value.peers.items() %}
+[Peer]
+# {{ peer }}
+PublicKey = {{ data.pub }}
+{% if data.endpoint %}
+Endpoint = {{ data.endpoint }}
+{% endif %}
+AllowedIPs = {{ data.allowedips }}
+
+{% endfor %}
