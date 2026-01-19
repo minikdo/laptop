@@ -119,7 +119,5 @@
       - chromium
       - webext-browserpass
       - webext-foxyproxy
-      - webext-ublock-origin-chromium
-      - webext-ublock-origin-firefox
       - yt-dlp
     state: present
