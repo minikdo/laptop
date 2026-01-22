@@ -16,6 +16,7 @@
       - apt-file
       - apt-listchanges
       - autossh
+      - cronic
       - direnv
       - dosfstools
       - enca
