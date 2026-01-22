@@ -12,6 +12,7 @@
       - elpa-ctable
       - elpa-dash
       - elpa-deferred
+      - elpa-diff-hl
       - elpa-diminish
       - elpa-dockerfile-mode
       - elpa-epc
