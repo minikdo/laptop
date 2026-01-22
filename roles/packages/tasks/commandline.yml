@@ -21,6 +21,7 @@
       - dosfstools
       - enca
       - gdu
+      - gworldclock
       - htop
       - jq
       - lsof
@@ -43,7 +44,6 @@
       - sm
       - sqlite3
       - tlp
-      - tzwatch
       - unzip
       - zip
     state: present
