@@ -25,6 +25,24 @@
   tags:
     - cron
 
+- name: Create DISPLAY env
+  ansible.builtin.cron:
+    name: DISPLAY
+    env: true
+    job: :0.0
+    user: domino
+  tags:
+    - cron
+
+- name: Create DBUS_SESSION_BUS_ADDRESS env
+  ansible.builtin.cron:
+    name: DBUS_SESSION_BUS_ADDRESS
+    env: true
+    job: unix:path=/run/user/1000/bus
+    user: domino
+  tags:
+    - cron
+
 - name: Create a crontab to backup tuptime db
   ansible.builtin.cron:
     name: "tuptime db backup task"
@@ -48,6 +66,15 @@
     name: "battery capacity backup task"
     special_time: "reboot"
     job: "~/syncthing/bin/backup_battery_capacity"
+    user: domino
+  tags:
+    - cron
+
+- name: Create a crontab to run batt notification script
+  ansible.builtin.cron:
+    name: "battery low notification script"
+    minute: "*/10"
+    job: "cronic ~/syncthing/bin/batt-low-notify"
     user: domino
   tags:
     - cron
