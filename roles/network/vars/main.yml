@@ -1,0 +1,7 @@
+network_wireless_iface:
+  carbon: wlan0
+  x1: wlp0s20f3
+  x260: wlp4s0
+
+network_wireless_ssid: Connectionlost_5
+network_wireless_ca_cert: /etc/wpa_supplicant/certs/dominowisla.pem

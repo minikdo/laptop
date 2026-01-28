@@ -1,0 +1,14 @@
+ctrl_interface=DIR=/run/wpa_supplicant GROUP=adm
+update_config={{ network_wireless_update_config }}
+p2p_disabled=1
+pmf={{ network_wireless_pmf }}
+
+network={
+    ssid="{{ network_wireless_ssid }}"
+    key_mgmt="{{ network_wireless_key_mgmt }}"
+    eap=TTLS
+    identity="{{ ansible_facts['hostname'] }}"
+    password="SECRET"
+    ca_cert="{{ network_wireless_ca_cert }}"
+    phase2="auth=MSCHAPV2"
+}

@@ -1,0 +1,27 @@
+- name: Configure wireless network
+  ansible.builtin.template:
+    src: "templates/wlan.network.j2"
+    dest: "/etc/systemd/network/{{ network_wireless_iface[ansible_facts['hostname']] }}.network"
+    mode: "0644"
+  tags: systemd-networkd
+
+- name: Enable now systemd-networkd
+  ansible.builtin.systemd:
+    state: started
+    enabled: true
+    name: systemd-networkd
+  tags: systemd-networkd
+
+- name: Check if networking.service exists
+  ansible.builtin.command: systemctl list-unit-files networking.service
+  register: service_check
+  failed_when: false
+  changed_when: false
+  tags: systemd-networkd
+
+- name: Disable networking.service
+  ansible.builtin.systemd:
+    enabled: false
+    name: networking
+  when: service_check.rc == 0
+  tags: systemd-networkd

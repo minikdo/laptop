@@ -1,5 +1,5 @@
 [Match]
-Name={{ iface[hostvars['localhost'].ansible_hostname] }}
+Name={{ network_wireless_iface[ansible_facts['hostname']] }}
 
 [Network]
 DHCP=Yes

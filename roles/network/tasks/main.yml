@@ -1,0 +1,7 @@
+- name: Configure systemd-networkd
+  ansible.builtin.include_tasks: systemd-networkd.yml
+  tags: systemd-networkd
+
+- name: Configure wpa_supplicant
+  ansible.builtin.include_tasks: wpa_supplicant.yml
+  tags: wpa_supplicant

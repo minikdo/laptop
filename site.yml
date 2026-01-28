@@ -19,7 +19,7 @@
     - { role: keyboard, tags: keyboard }
     - { role: packages, tags: packages }
     - { role: systemd, tags: systemd }
-    - { role: systemd-network, tags: systemd-network }
+    - { role: network, tags: network }
     - { role: polkit, tags: polkit }
     - { role: zsh, tags: zsh }
     - { role: console-setup, tags: console-setup }
