@@ -12,7 +12,7 @@
     owner: root
     group: root
   loop: "{{ lookup('dict', wireguard, wantlist=True) }}"
-  tags: test
+  tags: wireguard
 
 # TODO: move to a handler?
 - name: Systemd reload wg-quick
