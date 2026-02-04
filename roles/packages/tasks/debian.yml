@@ -4,6 +4,7 @@
       - dpkg-dev
       - dput
       - devscripts
+      - fakeroot
       - lintian
       - quilt
       - debian-policy
