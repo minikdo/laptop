@@ -10,8 +10,11 @@
 - name: Add signal apt repo
   ansible.builtin.apt_repository:
     repo: >
-      deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg]
-      https://updates.signal.org/desktop/apt xenial main
+      Types: deb
+      URIs: https://updates.signal.org/desktop/apt/
+      Suites: xenial
+      Components: main
+      Signed-By: /usr/share/keyrings/signal-desktop-keyring.gpg
   tags: signal
 
 - name: Pin signal packages
