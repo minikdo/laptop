@@ -46,6 +46,7 @@
       - tlp
       - unzip
       - zip
+      - 7zip
     state: present
 
 - name: Install version control tools
