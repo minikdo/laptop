@@ -32,3 +32,4 @@
     - { role: nftables, tags: nftables }
     - { role: postgresql, tags: postgresql }
     - { role: dnsmasq, tags: dnsmasq }
+    - { role: lightdm, tags: lightdm }
