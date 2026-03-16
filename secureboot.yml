@@ -1,0 +1,122 @@
+- name: Complete Secure Boot Setup and Signing
+  hosts: localhost
+  become: true
+  vars:
+    key_dir: "/root/efi-keys"
+    efi_lib_dir: "/usr/lib/systemd/boot/efi"
+    cert_list:
+      - { prefix: "pk", cn: "My Platform Key" }
+      - { prefix: "kek", cn: "My Key Exchange Key" }
+      - { prefix: "db", cn: "My Signature DB Key" }
+
+  tasks:
+    - name: Install packages
+      ansible.builtin.apt:
+        state: present
+        pkg:
+          - uuid-runtime
+          - efitools
+
+    - name: Create key directory
+      ansible.builtin.file:
+        path: "{{ key_dir }}"
+        state: directory
+        mode: '0700'
+
+    - name: Check if GUID exists
+      ansible.builtin.stat:
+        path: "{{ key_dir }}/guid.txt"
+      register: guid_file
+
+    - name: Generate random GUID
+      ansible.builtin.shell: "uuidgen --random > {{ key_dir }}/guid.txt"
+      when: not guid_file.stat.exists
+      register: uuid_gen
+      changed_when: uuid_gen.rc == 0
+
+    - name: Read GUID
+      ansible.builtin.command: "cat {{ key_dir }}/guid.txt"
+      register: current_guid
+      changed_when: false
+
+    - name: Generate RSA Private Keys
+      community.crypto.openssl_privatekey:
+        path: "{{ key_dir }}/{{ item.prefix }}.key"
+        size: 2048
+      loop: "{{ cert_list }}"
+
+    - name: Generate CSRs
+      community.crypto.openssl_csr:
+        path: "{{ key_dir }}/{{ item.prefix }}.csr"
+        privatekey_path: "{{ key_dir }}/{{ item.prefix }}.key"
+        common_name: "{{ item.cn }}"
+      loop: "{{ cert_list }}"
+
+    - name: Generate Self-Signed Certificates
+      community.crypto.x509_certificate:
+        path: "{{ key_dir }}/{{ item.prefix }}.crt"
+        privatekey_path: "{{ key_dir }}/{{ item.prefix }}.key"
+        csr_path: "{{ key_dir }}/{{ item.prefix }}.csr"
+        provider: selfsigned
+        selfsigned_not_after: "+3650d"
+        selfsigned_digest: sha256
+      loop: "{{ cert_list }}"
+
+    - name: Convert to EFI Signature Lists (ESL)
+      ansible.builtin.command: >
+        cert-to-efi-sig-list -g "{{ current_guid.stdout | trim }}"
+        {{ key_dir }}/{{ item.prefix }}.crt {{ key_dir }}/{{ item.prefix }}.esl
+      args:
+        creates: "{{ key_dir }}/{{ item.prefix }}.esl"
+      loop: "{{ cert_list }}"
+
+    - name: Sign PK Signature List (Generate .auth)
+      ansible.builtin.command: >
+        sign-efi-sig-list -k {{ key_dir }}/pk.key -c {{ key_dir }}/pk.crt PK
+        {{ key_dir }}/pk.esl {{ key_dir }}/pk.auth
+      args:
+        creates: "{{ key_dir }}/pk.auth"
+
+    - name: Update UEFI variables (db and KEK)
+      ansible.builtin.command: "efi-updatevar -e -f {{ key_dir }}/{{ item.file }} {{ item.var }}"
+      loop:
+        - { file: "db.esl", var: "db" }
+        - { file: "kek.esl", var: "KEK" }
+      register: update_status
+      failed_when:
+        - update_status.rc != 0
+        - "'already exists' not in update_status.stderr"
+      changed_when: "'already exists' not in update_status.stderr"
+
+    - name: Set Platform Key (PK) - Finalize Secure Boot
+      ansible.builtin.command: "efi-updatevar -f {{ key_dir }}/pk.auth PK"
+      register: pk_status
+      failed_when:
+        - pk_status.rc != 0
+        - "'already exists' not in pk_status.stderr"
+      changed_when: "'already exists' not in pk_status.stderr"
+
+    - name: Check if EFI binaries are already signed
+      ansible.builtin.command: "sbverify --cert {{ key_dir }}/db.crt {{ efi_lib_dir }}/{{ item }}"
+      register: verify_sign
+      failed_when: false
+      changed_when: false
+      loop:
+        - systemd-bootx64.efi
+        - linuxx64.efi.stub
+
+    - name: Sign EFI binaries if verification failed
+      ansible.builtin.command: >
+        sbsign --key {{ key_dir }}/db.key --cert {{ key_dir }}/db.crt
+        --output {{ efi_lib_dir }}/{{ item.item }} {{ efi_lib_dir }}/{{ item.item }}
+      when: item.rc != 0
+      loop: "{{ verify_sign.results }}"
+      loop_control:
+        label: "{{ item.item }}"
+      changed_when: true  # silences 'no-changed-when', explicit declaration
+      # task makes actual change on disk
+
+    - name: Install systemd-boot
+      ansible.builtin.command: bootctl install
+      register: bootctl_res
+      changed_when: "'Copied' in bootctl_res.stdout or 'Created' in bootctl_res.stdout"
